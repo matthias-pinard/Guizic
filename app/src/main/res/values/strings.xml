@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Guizic</string>
+    <string name="button_play_sound">Play sound</string>
+    <string name="label_no_hablo">No hablo</string>
+    <string name="local_service_started">Guizic en cour d\'execution</string>
+    <string name="local_service_label">Guizic</string>
+</resources>
