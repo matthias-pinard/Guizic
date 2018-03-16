@@ -12,8 +12,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 public class GpsActivity extends AppCompatActivity {
@@ -29,12 +27,21 @@ public class GpsActivity extends AppCompatActivity {
 
     private Gps mGps;
 
-    private ServiceConnection mConnection = new ServiceConnection() {
+    private Gps.GpsChangeListener mGpsChangeListener = new Gps.GpsChangeListener() {
+        @Override
+        public void onCHangeDo() {
+            refresh();
+        }
+    };
 
+    private ServiceConnection mConnection = new ServiceConnection() {
+        MyService.LocalBinder localBinder;
         @Override
         public void onServiceConnected (ComponentName className, IBinder binder) {
-            MyService.LocalBinder localBinder = ((MyService.LocalBinder)binder).getService();
+            localBinder = (MyService.LocalBinder) binder;
             mGps = localBinder.getGps();
+            localBinder.setGpsListener(mGpsChangeListener);
+            localBinder.activateListener();
             float longitude = mIntent.getFloatExtra("longitude", 0);
             float latitude = mIntent.getFloatExtra("latitude", 0);
             mDestination = new Location("User");
@@ -51,6 +58,7 @@ public class GpsActivity extends AppCompatActivity {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+            localBinder.desactivateListener();
             mGps = null;
         }
     };
@@ -97,7 +105,7 @@ public class GpsActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickRefresh(View view) {
+    public void refresh() {
         float longitude = mIntent.getFloatExtra("longitude", 0);
         float latitude = mIntent.getFloatExtra("latitude", 0);
         mDestination = new Location("User");
@@ -111,4 +119,5 @@ public class GpsActivity extends AppCompatActivity {
 
         Log.d(TAG, "Distance : " + mGps.getDistanceToDestination());
     }
+
 }

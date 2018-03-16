@@ -1,11 +1,7 @@
 package com.example.matthias.guizic;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.media.MediaPlayer;
-import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,16 +13,19 @@ public class MainActivity extends AppCompatActivity {
 
     final String TAG = "Debug";
 
-    SeekBar seekBarNoHablo;
-    SeekBar seekBarBass;
-    SeekBar seekBarDrum;
-    SeekBar seekBarSynthLead;
+//    SeekBar seekBarNoHablo;
+//    SeekBar seekBarBass;
+//    SeekBar seekBarDrum;
+//    SeekBar seekBarSynthLead;
 
+    SeekBar mSeekBar;
     MediaPlayer noHablo;
     MediaPlayer bass;
     MediaPlayer drum;
     MediaPlayer pad;
     MediaPlayer synthLead;
+
+    MusicsManager mMusicsManager;
 
 
 
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         noHablo = MediaPlayer.create(this, R.raw.no_hablo);
-
+        noHablo.setLooping(true);
         bass = MediaPlayer.create(this, R.raw.bass);
         bass.setLooping(true);
 
@@ -49,6 +48,21 @@ public class MainActivity extends AppCompatActivity {
 
         synthLead = MediaPlayer.create(this, R.raw.synth_lead);
         synthLead.setLooping(true);
+
+        mMusicsManager = new MusicsManager();
+        mMusicsManager.addMediaPlayer(noHablo);
+        mMusicsManager.addMediaPlayer(bass);
+        mMusicsManager.addMediaPlayer(drum);
+        mMusicsManager.addMediaPlayer(pad);
+        mMusicsManager.addMediaPlayer(synthLead);
+
+        mSeekBar = findViewById(R.id.seekBar);
+        mSeekBar.setMax(mMusicsManager.getNBMediaPlayer() * 100);
+        Log.d("Main", "" + mMusicsManager.getNBMediaPlayer());
+        mSeekBar.setProgress(0);
+        mSeekBar.setOnSeekBarChangeListener(new SeekListener());
+
+        mMusicsManager.start();
 
 //         seekBarNoHablo = findViewById(R.id.seekBarNoHablo);
 //         seekBarNoHablo.setOnSeekBarChangeListener(new SeekListener(noHablo));
@@ -65,25 +79,15 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "App created");
     }
 
-    public void onClickPlaySound(View view) {
-
-        noHablo.start();
-        bass.start();
-        drum.start();
-        synthLead.start();
-    }
-
     public void seekBarOnProgressChange(SeekBar seekBar, int progress, boolean fromUser, MediaPlayer mediaPlayer) {
-        float maxVolume = 100;
-        float log1=(float)(Math.log(maxVolume-progress)/Math.log(maxVolume));
-        mediaPlayer.setVolume(1 - log1, 1 - log1);
+        mMusicsManager.setVolume(progress);
     }
 
     public class SeekListener implements SeekBar.OnSeekBarChangeListener {
 
         MediaPlayer mMediaPlayer;
-        public SeekListener(MediaPlayer mediaPlayer) {
-            mMediaPlayer = mediaPlayer;
+        public SeekListener() {
+
         }
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {

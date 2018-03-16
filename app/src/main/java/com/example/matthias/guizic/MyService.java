@@ -15,15 +15,24 @@ public class MyService extends Service {
     private NotificationManager mNM;
     private LocalBinder mBinder = new LocalBinder();
     private Gps mGps;
+    private Gps.GpsChangeListener mGpsChangeListener;
 
     private int NOTIFICATION = R.string.local_service_started;
     public class LocalBinder extends Binder {
-        LocalBinder getService() {
-            return this;
-        }
-
         Gps getGps() {
             return mGps;
+        }
+
+        public void activateListener() {
+            mGps.setListenerActive(true);
+        }
+
+        public void desactivateListener() {
+            mGps.setListenerActive(false);
+        }
+
+        public void setGpsListener(Gps.GpsChangeListener gpsListener) {
+            mGps.setGpsChangeListener(gpsListener);
         }
     }
 
