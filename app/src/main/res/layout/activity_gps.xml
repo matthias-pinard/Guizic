@@ -7,7 +7,7 @@
     tools:context="com.example.matthias.guizic.GpsActivity">
 
     <TextView
-        android:id="@+id/textViewDistance"
+        android:id="@+id/textViewDestination"
         android:layout_width="344dp"
         android:layout_height="61dp"
         android:layout_marginBottom="8dp"
@@ -15,7 +15,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="monospace"
-        android:text="TextView"
+        android:text="Yo"
         android:textAlignment="center"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +19,9 @@ public class GpsActivity extends AppCompatActivity {
 
     private final String TAG = "GPS_ACTIVITY_DEBUG";
     private Location mDestination;
-
+    private boolean mIsDestInit = false;
     private Intent mIntent;
+    private double mSensibilite = 1.3;
 
     private boolean mIsBound;
 
@@ -42,17 +44,18 @@ public class GpsActivity extends AppCompatActivity {
             mGps = localBinder.getGps();
             //localBinder.setGpsListener(mGpsChangeListener);
             //localBinder.activateListener();
-            double longitude = mIntent.getFloatExtra("longitude", 0);
-            double latitude = mIntent.getFloatExtra("latitude", 0);
-            mDestination = new Location("User");
-            latitude = 48.117911;
-            longitude = -1.640435;
-            mDestination.setLatitude(latitude);
-            mDestination.setLongitude(longitude);
-
-
+            if(!mIsDestInit)
+            {
+                double longitude = mIntent.getFloatExtra("longitude", 0);
+                double latitude = mIntent.getFloatExtra("latitude", 0);
+                latitude = 48.117911;
+                longitude = -1.640435;
+                mDestination.setLatitude(latitude);
+                mDestination.setLongitude(longitude);
+                mIsDestInit = true;
+            }
             mGps.setDestination(mDestination);
-            TextView textViewDistance = (TextView) findViewById(R.id.textViewDistance);
+            TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
             textViewDistance.setText(String.valueOf(mGps.getDistanceToDestination()));
 
             Log.d(TAG, "Distance : " + mGps.getDistanceToDestination());
@@ -69,7 +72,27 @@ public class GpsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps);
+        mDestination = new Location("User");
         mIntent = getIntent();
+        Uri data = mIntent.getData();
+        if(data != null && data.isHierarchical())
+        {
+            if(data.getQueryParameter("latitude") != null &&
+                    data.getQueryParameter("longitude") != null)
+            {
+                double longitude = Double.parseDouble(data.getQueryParameter("latitude"));
+                double latitude = Double.parseDouble(data.getQueryParameter("longitude"));
+                Log.d(TAG, "long : " + longitude);
+                mDestination.setLongitude(longitude);
+                mDestination.setLatitude(latitude);
+                mIsDestInit = true;
+            }
+        }
+       /* TextView textView = (TextView)findViewById(R.id.textViewDestination);
+        textView.setText(mDestination.toString());
+        textView.invalidate();*/
+
+
     }
 
     @Override
@@ -116,8 +139,8 @@ public class GpsActivity extends AppCompatActivity {
 
 
         mGps.setDestination(mDestination);
-        TextView textViewDistance = (TextView) findViewById(R.id.textViewDistance);
-        textViewDistance.setText(String.valueOf(mGps.getDistanceToDestination()));
+        /*TextView textViewDistance = (TextView) findViewById(R.id.textViewDistance);
+        textViewDistance.setText(String.valueOf(mGps.getDistanceToDestination()));*/
 
         Log.d(TAG, "Distance : " + mGps.getDistanceToDestination());
     }
