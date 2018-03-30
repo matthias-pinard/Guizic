@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         mSeekBar.setProgress(0);
         mSeekBar.setOnSeekBarChangeListener(new SeekListener());
 
-        mMusicsManager.start();
+       //e mMusicsManager.start();
 
 //         seekBarNoHablo = findViewById(R.id.seekBarNoHablo);
 //         seekBarNoHablo.setOnSeekBarChangeListener(new SeekListener(noHablo));
@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickTestGps(View view) {
-        float longitude = Float.parseFloat(((EditText) findViewById(R.id.editTextLongitude)).getText().toString());
-        float latitude  = Float.parseFloat(((EditText) findViewById(R.id.editTextLatitude)).getText().toString());
+        double longitude = Float.parseFloat(((EditText) findViewById(R.id.editTextLongitude)).getText().toString());
+        double latitude  = Float.parseFloat(((EditText) findViewById(R.id.editTextLatitude)).getText().toString());
         Intent intent = new Intent(this, GpsActivity.class);
         intent.putExtra("latitude", latitude);
         intent.putExtra("longitude", longitude);

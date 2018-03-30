@@ -40,11 +40,13 @@ public class GpsActivity extends AppCompatActivity {
         public void onServiceConnected (ComponentName className, IBinder binder) {
             localBinder = (MyService.LocalBinder) binder;
             mGps = localBinder.getGps();
-            localBinder.setGpsListener(mGpsChangeListener);
-            localBinder.activateListener();
-            float longitude = mIntent.getFloatExtra("longitude", 0);
-            float latitude = mIntent.getFloatExtra("latitude", 0);
+            //localBinder.setGpsListener(mGpsChangeListener);
+            //localBinder.activateListener();
+            double longitude = mIntent.getFloatExtra("longitude", 0);
+            double latitude = mIntent.getFloatExtra("latitude", 0);
             mDestination = new Location("User");
+            latitude = 48.117911;
+            longitude = -1.640435;
             mDestination.setLatitude(latitude);
             mDestination.setLongitude(longitude);
 
@@ -106,8 +108,8 @@ public class GpsActivity extends AppCompatActivity {
     }
 
     public void refresh() {
-        float longitude = mIntent.getFloatExtra("longitude", 0);
-        float latitude = mIntent.getFloatExtra("latitude", 0);
+        double longitude = mIntent.getDoubleExtra("longitude", 0);
+        double latitude = mIntent.getDoubleExtra("latitude", 0);
         mDestination = new Location("User");
         mDestination.setLatitude(latitude);
         mDestination.setLongitude(longitude);

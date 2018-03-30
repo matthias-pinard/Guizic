@@ -42,6 +42,10 @@ public class Gps {
     public double getDistanceToDestination() {
         return mDistanceDestination;
     }
+
+    public Location getDestination() {
+        return mDestination;
+    }
     LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {

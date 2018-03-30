@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -15,9 +16,14 @@ public class MyService extends Service {
     private NotificationManager mNM;
     private LocalBinder mBinder = new LocalBinder();
     private Gps mGps;
-    private Gps.GpsChangeListener mGpsChangeListener;
 
     private int NOTIFICATION = R.string.local_service_started;
+
+    private MusicsManager mMusicsManager;
+
+    private double mDistanceMaximum;
+    int  mIsDistInit = 0;
+
     public class LocalBinder extends Binder {
         Gps getGps() {
             return mGps;
@@ -44,6 +50,12 @@ public class MyService extends Service {
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         //Affiche une notification pour dire que le service à démarrer.
         showNotification();
+        initMusic();
+        mMusicsManager.setVolume(0);
+        mMusicsManager.start();
+        mGps.setGpsChangeListener(mGpsChangeListener);
+        mGps.setListenerActive(true);
+
     }
 
     @Override
@@ -97,4 +109,36 @@ public class MyService extends Service {
             startActivity(intent);
         }
     }
+
+    public void initMusic() {
+        MediaPlayer noHablo = MediaPlayer.create(this, R.raw.no_hablo);
+        MediaPlayer bass = MediaPlayer.create(this, R.raw.bass);
+        MediaPlayer drum = MediaPlayer.create(this, R.raw.drum);
+        MediaPlayer pad = MediaPlayer.create(this, R.raw.pad);
+        MediaPlayer synthLead = MediaPlayer.create(this, R.raw.synth_lead);
+
+        mMusicsManager = new MusicsManager();
+        //mMusicsManager.addMediaPlayer(noHablo);
+        mMusicsManager.addMediaPlayer(pad);
+        mMusicsManager.addMediaPlayer(bass);
+        mMusicsManager.addMediaPlayer(drum);
+        mMusicsManager.addMediaPlayer(synthLead);
+    }
+
+    public void gpsListener() {
+            double dist = mGps.getDistanceToDestination();
+            double vol = mMusicsManager.getMaxVolume() - dist * 1.3;
+            Log.d("Distance", "" + dist);
+            Log.d("Vol", "" + vol);
+            Log.d("Destination", mGps.getDestination().toString());
+            mMusicsManager.setVolume( vol);
+    }
+
+    private Gps.GpsChangeListener mGpsChangeListener = new Gps.GpsChangeListener(){
+
+        @Override
+        public void onCHangeDo() {
+            gpsListener();
+        }
+    };
 }

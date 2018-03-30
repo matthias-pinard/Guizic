@@ -15,9 +15,9 @@ import java.util.List;
 
 public class MusicsManager {
     private List<MediaPlayer> mListMedia = new ArrayList<MediaPlayer>();
-    private final float pasVolume = 100;
-    private float maxVolume = 0;
-    private float mVolume = 0;
+    private final double pasVolume = 100;
+    private double maxVolume = 0;
+    private double mVolume = 0;
     public int nbMediaPlayer = 0;
 
     public MusicsManager() {
@@ -31,7 +31,7 @@ public class MusicsManager {
 
     }
 
-    public void setVolume(float volume) {
+    public void setVolume(double volume) {
 
         Log.d("Volume", "" + volume);
         for(MediaPlayer mediaPlayer : mListMedia)
@@ -61,6 +61,13 @@ public class MusicsManager {
         return nbMediaPlayer;
     }
 
+    public double getMaxVolume() {
+        return maxVolume;
+    }
+
+    public double getVolume() {
+        return mVolume;
+    }
     public void start()
     {
         for(MediaPlayer mediaPlayer : mListMedia)
