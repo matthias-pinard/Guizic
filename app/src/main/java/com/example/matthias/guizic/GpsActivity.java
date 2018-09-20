@@ -42,21 +42,9 @@ public class GpsActivity extends AppCompatActivity {
         public void onServiceConnected (ComponentName className, IBinder binder) {
             localBinder = (MyService.LocalBinder) binder;
             mGps = localBinder.getGps();
-            //localBinder.setGpsListener(mGpsChangeListener);
-            //localBinder.activateListener();
-            if(!mIsDestInit)
-            {
-                double longitude = mIntent.getFloatExtra("longitude", 0);
-                double latitude = mIntent.getFloatExtra("latitude", 0);
-                latitude = 48.117911;
-                longitude = -1.640435;
-                mDestination.setLatitude(latitude);
-                mDestination.setLongitude(longitude);
-                mIsDestInit = true;
-            }
+            localBinder.setGpsListener(mGpsChangeListener);
+            localBinder.activateListener();
             mGps.setDestination(mDestination);
-            TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
-            textViewDistance.setText(String.valueOf(mGps.getDistanceToDestination()));
 
             Log.d(TAG, "Distance : " + mGps.getDistanceToDestination());
         }
@@ -82,16 +70,19 @@ public class GpsActivity extends AppCompatActivity {
             {
                 double longitude = Double.parseDouble(data.getQueryParameter("latitude"));
                 double latitude = Double.parseDouble(data.getQueryParameter("longitude"));
-                Log.d(TAG, "long : " + longitude);
                 mDestination.setLongitude(longitude);
                 mDestination.setLatitude(latitude);
                 mIsDestInit = true;
             }
         }
-       /* TextView textView = (TextView)findViewById(R.id.textViewDestination);
-        textView.setText(mDestination.toString());
-        textView.invalidate();*/
-
+        else {
+            double longitude = mIntent.getDoubleExtra("longitude", -1);
+            double latitude = mIntent.getDoubleExtra("latitude", -1);
+            Log.d(TAG, "Latitude : " + latitude + ", longitude : " + longitude);
+            mDestination.setLatitude(latitude);
+            mDestination.setLongitude(longitude);
+            mIsDestInit = true;
+        }
 
     }
 
@@ -111,11 +102,11 @@ public class GpsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyService.class);
         mIsBound = true;
         mBoundState = bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        Log.d("Tag", "Service bound: " + mBoundState);
+        Log.d(TAG, "Service bound: " + mBoundState);
     }
 
     void doUnbindService () {
-        Log.d("Tag", "Service bound: " + mBoundState);
+        Log.d(TAG, "Service bound: " + mBoundState);
         if (mIsBound) {
             unbindService(mConnection);
             mIsBound = false;
@@ -131,16 +122,11 @@ public class GpsActivity extends AppCompatActivity {
     }
 
     public void refresh() {
-        double longitude = mIntent.getDoubleExtra("longitude", 0);
-        double latitude = mIntent.getDoubleExtra("latitude", 0);
-        mDestination = new Location("User");
-        mDestination.setLatitude(latitude);
-        mDestination.setLongitude(longitude);
-
 
         mGps.setDestination(mDestination);
-        /*TextView textViewDistance = (TextView) findViewById(R.id.textViewDistance);
-        textViewDistance.setText(String.valueOf(mGps.getDistanceToDestination()));*/
+        String distance = String.format("%.2f", mGps.getDistanceToDestination());
+        TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
+        textViewDistance.setText(String.valueOf(distance));
 
         Log.d(TAG, "Distance : " + mGps.getDistanceToDestination());
     }

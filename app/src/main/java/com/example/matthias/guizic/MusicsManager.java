@@ -5,6 +5,7 @@ package com.example.matthias.guizic;
 import android.media.MediaPlayer;
 import android.util.Log;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,30 +35,23 @@ public class MusicsManager {
     public void setVolume(double volume) {
 
         Log.d("Volume", "" + volume);
-        for(MediaPlayer mediaPlayer : mListMedia)
-        {
+        for (MediaPlayer mediaPlayer : mListMedia) {
             boolean init = false;
-            if(volume >= pasVolume)
-            {
-                mediaPlayer.setVolume(1,1);
+            if (volume >= pasVolume) {
+                mediaPlayer.setVolume(1, 1);
                 volume -= pasVolume;
-            }
-
-            else if (!init)
-            {
-                float vol=(float) (1 - (Math.log(100 - volume) / Math.log(100)));
-                mediaPlayer.setVolume(vol,vol);
+            } else if (!init) {
+                float vol = (float) (1 - (Math.log(100 - volume) / Math.log(100)));
+                mediaPlayer.setVolume(vol, vol);
                 volume = 0;
                 init = true;
-            }
-            else {
-                mediaPlayer.setVolume(0,0);
+            } else {
+                mediaPlayer.setVolume(0, 0);
             }
         }
     }
 
-    public int getNBMediaPlayer()
-    {
+    public int getNBMediaPlayer() {
         return nbMediaPlayer;
     }
 
@@ -68,12 +62,34 @@ public class MusicsManager {
     public double getVolume() {
         return mVolume;
     }
-    public void start()
-    {
-        for(MediaPlayer mediaPlayer : mListMedia)
-        {
+
+    public void start() {
+        for (MediaPlayer mediaPlayer : mListMedia) {
             mediaPlayer.setLooping(true);
             mediaPlayer.start();
         }
     }
+
+    public void stop() {
+        for(MediaPlayer mediaPlayer : mListMedia) {
+            mediaPlayer.stop();
+        }
+    }
+
+    public void pause() {
+        for(MediaPlayer mediaPlayer : mListMedia) {
+            mediaPlayer.pause();
+        }
+    }
+
+    public void prepare() {
+        for(MediaPlayer mediaPlayer : mListMedia) {
+            try {
+                mediaPlayer.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
