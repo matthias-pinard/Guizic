@@ -21,13 +21,12 @@ public class MyService extends Service {
     private LocalBinder mBinder = new LocalBinder();
     private Gps mGps;
     private boolean isArrived = false;
-
+    private Gps.GpsChangeListener mActivityListener;
     private int NOTIFICATION = R.string.local_service_started;
 
     private MusicsManager mMusicsManager;
 
-    private double mDistanceMaximum;
-    int  mIsDistInit = 0;
+    private boolean mIsActivityListenerActive = false;
 
     public class LocalBinder extends Binder {
         Gps getGps() {
@@ -35,15 +34,15 @@ public class MyService extends Service {
         }
 
         public void activateListener() {
-            mGps.setListenerActive(true);
+            mIsActivityListenerActive = true;
         }
 
         public void desactivateListener() {
-            mGps.setListenerActive(false);
+           mIsActivityListenerActive = false;
         }
 
         public void setGpsListener(Gps.GpsChangeListener gpsListener) {
-            mGps.setGpsChangeListener(gpsListener);
+            mActivityListener = gpsListener;
         }
     }
 
@@ -51,6 +50,10 @@ public class MyService extends Service {
     public void onCreate() {
         promptForGps();
         mGps = new Gps(this);
+        mGps.setGpsChangeListener(mGpsChangeListener);
+        mGps.setListenerActive(true);
+
+
         Log.d("DEBUG", "Service bound.");
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         //Affiche une notification pour dire que le service à démarrer.
@@ -150,6 +153,9 @@ public class MyService extends Service {
 
         @Override
         public void onCHangeDo() {
+            if(mIsActivityListenerActive) {
+                mActivityListener.onCHangeDo();
+            }
             gpsListener();
         }
     };

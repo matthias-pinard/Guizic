@@ -123,7 +123,6 @@ public class GpsActivity extends AppCompatActivity {
 
     public void refresh() {
 
-        mGps.setDestination(mDestination);
         String distance = String.format("%.2f", mGps.getDistanceToDestination());
         TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
         textViewDistance.setText(String.valueOf(distance));
