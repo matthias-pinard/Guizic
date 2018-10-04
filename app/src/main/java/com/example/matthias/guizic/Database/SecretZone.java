@@ -19,26 +19,27 @@ public class SecretZone {
     private double sensibilite;
 
     @ColumnInfo
-    private String RealName;
+    private String realName;
+
 
     public String getRealName() {
-        return RealName;
+        return realName;
     }
 
     public void setRealName(String realName) {
-        RealName = realName;
+        this.realName = realName;
     }
 
     public String getSecretName() {
-        return SecretName;
+        return secretName;
     }
 
     public void setSecretName(String secretName) {
-        SecretName = secretName;
+        this.secretName = secretName;
     }
 
     @ColumnInfo
-    private String SecretName;
+    private String secretName;
 
     public int getUid() {
         return uid;
@@ -70,5 +71,21 @@ public class SecretZone {
 
     public void setSensibilite(double sensibilite) {
         this.sensibilite = sensibilite;
+    }
+
+
+    public SecretZone(double latitude, double longitude, double sensibilite, String realName, String secretName) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.sensibilite = sensibilite;
+        this.realName = realName;
+        this.secretName = secretName;
+    }
+
+    public static SecretZone[] populateData() {
+        return new SecretZone[] {
+                new SecretZone(-1.636408, 48.118096, 1.3, "Esir", "E"),
+                new SecretZone(-1.638580, 48.114272, 1.3, "Osur", "O")
+        };
     }
 }
