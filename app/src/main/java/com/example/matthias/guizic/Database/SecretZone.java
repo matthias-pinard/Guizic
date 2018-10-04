@@ -1,4 +1,4 @@
-package com.example.matthias.guizic;
+package com.example.matthias.guizic.Database;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
