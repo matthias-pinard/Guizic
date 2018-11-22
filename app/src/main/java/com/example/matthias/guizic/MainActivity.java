@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
+import com.example.matthias.guizic.RecyclerActivity.ListActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     final String TAG = "Debug";
@@ -88,6 +90,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GpsActivity.class);
         intent.putExtra("latitude", latitude);
         intent.putExtra("longitude", longitude);
+        startActivity(intent);
+    }
+
+    public void onClickListActivity(View view) {
+        Intent intent = new Intent(this, ListActivity.class);
         startActivity(intent);
     }
 

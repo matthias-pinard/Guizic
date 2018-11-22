@@ -19,17 +19,18 @@ public class MyService extends Service {
     static private  String TAG = "DEBUG_SERVICE";
     private NotificationManager mNM;
     private LocalBinder mBinder = new LocalBinder();
-    private Gps mGps;
+    private GpsSimple mGps;
     private boolean isArrived = false;
-    private Gps.GpsChangeListener mActivityListener;
+    private GpsSimple.GpsChangeListener mActivityListener;
     private int NOTIFICATION = R.string.local_service_started;
 
+    private double mSensibilite = 0.7;
     private MusicsManager mMusicsManager;
 
     private boolean mIsActivityListenerActive = false;
 
     public class LocalBinder extends Binder {
-        Gps getGps() {
+        GpsSimple getGps() {
             return mGps;
         }
 
@@ -41,15 +42,19 @@ public class MyService extends Service {
            mIsActivityListenerActive = false;
         }
 
-        public void setGpsListener(Gps.GpsChangeListener gpsListener) {
+        public void setGpsListener(GpsSimple.GpsChangeListener gpsListener) {
             mActivityListener = gpsListener;
+        }
+
+        public void setSensibility(double sensibility) {
+            mSensibilite = sensibility;
         }
     }
 
     @Override
     public void onCreate() {
         promptForGps();
-        mGps = new Gps(this);
+        mGps = new GpsSimple(this);
         mGps.setGpsChangeListener(mGpsChangeListener);
         mGps.setListenerActive(true);
 
@@ -136,7 +141,8 @@ public class MyService extends Service {
 
     public void gpsListener() {
             double dist = mGps.getDistanceToDestination();
-            double vol = mMusicsManager.getMaxVolume() - dist * 1.3;
+            Log.d(TAG, "max volume" + mMusicsManager.getMaxVolume());
+            double vol = mMusicsManager.getMaxVolume() - dist * mSensibilite;
             Log.d(TAG, "distance" + dist);
             Log.d(TAG, "Vol" + vol);
             //Log.d("Destination", mGps.getDestination().toString());
@@ -149,7 +155,7 @@ public class MyService extends Service {
         mMusicsManager.setVolume(0);
         musicWin.start();
     }
-    private Gps.GpsChangeListener mGpsChangeListener = new Gps.GpsChangeListener(){
+    private GpsSimple.GpsChangeListener mGpsChangeListener = new GpsSimple.GpsChangeListener(){
 
         @Override
         public void onCHangeDo() {

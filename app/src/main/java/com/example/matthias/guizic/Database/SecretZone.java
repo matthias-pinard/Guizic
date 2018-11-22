@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class SecretZone {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int uid;
 
     @ColumnInfo
@@ -74,7 +74,7 @@ public class SecretZone {
     }
 
 
-    public SecretZone(double latitude, double longitude, double sensibilite, String realName, String secretName) {
+    public SecretZone(double longitude, double latitude, double sensibilite, String realName, String secretName) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.sensibilite = sensibilite;
@@ -83,9 +83,13 @@ public class SecretZone {
     }
 
     public static SecretZone[] populateData() {
-        return new SecretZone[] {
+        SecretZone[] s = new SecretZone[] {
                 new SecretZone(-1.636408, 48.118096, 1.3, "Esir", "E"),
-                new SecretZone(-1.638580, 48.114272, 1.3, "Osur", "O")
+                new SecretZone(-1.638580, 48.114272, 1.3, "Osur", "O"),
+                new SecretZone(-1.643484, 48.117491, 1.3, "Diapason", "D"),
+                new SecretZone(-1.635913, 48.118464, 1.3, "Cafeteria", "C"),
+                new SecretZone(-1.638580, 48.114272, 1.0, "Osur", "Paul"),
         };
+        return s;
     }
 }

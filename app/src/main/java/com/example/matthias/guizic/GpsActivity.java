@@ -1,8 +1,10 @@
 package com.example.matthias.guizic;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
@@ -10,9 +12,12 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class GpsActivity extends AppCompatActivity {
@@ -23,21 +28,25 @@ public class GpsActivity extends AppCompatActivity {
     private Intent mIntent;
     private double mSensibilite = 1.3;
 
+    private int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private boolean mIsBound;
 
     private boolean mBoundState;
 
-    private Gps mGps;
+    private GpsSimple mGps;
 
-    private Gps.GpsChangeListener mGpsChangeListener = new Gps.GpsChangeListener() {
+    private SeekBar mSeekBar;
+
+    private GpsSimple.GpsChangeListener mGpsChangeListener = new GpsSimple.GpsChangeListener() {
         @Override
         public void onCHangeDo() {
             refresh();
         }
     };
 
+    MyService.LocalBinder localBinder;
     private ServiceConnection mConnection = new ServiceConnection() {
-        MyService.LocalBinder localBinder;
+
         @Override
         public void onServiceConnected (ComponentName className, IBinder binder) {
             localBinder = (MyService.LocalBinder) binder;
@@ -60,6 +69,7 @@ public class GpsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps);
+
         mDestination = new Location("User");
         mIntent = getIntent();
         Uri data = mIntent.getData();
@@ -84,13 +94,18 @@ public class GpsActivity extends AppCompatActivity {
             mIsDestInit = true;
         }
 
+        boolean perm = requestPermission();
+        Log.d(TAG, "Permission: " + String.valueOf(perm));
+        if (perm) {
+            doBindService();
+        }
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        requestLocationRigth();
-        doBindService();
+
     }
 
     protected void onStop() {
@@ -130,4 +145,75 @@ public class GpsActivity extends AppCompatActivity {
         Log.d(TAG, "Distance : " + mGps.getDistanceToDestination());
     }
 
+    public boolean requestPermission() {
+        final Activity activity = this;
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.title_location_permission)
+                        .setMessage(R.string.text_location_permission)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //Prompt the user once explanation has been shown
+                                ActivityCompat.requestPermissions(activity,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        })
+                        .create()
+                        .show();
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+            return false;
+        } else {
+           return true;
+        }
+    }
+
+    public void initSeekBar() {
+        mSeekBar = findViewById(R.id.seekBarSensi);
+        mSeekBar.setMax(3);
+        mSeekBar.setProgress(1);
+//        mSeekBar.setOnSeekBarChangeListener(new SeekListener());
+    }
+
+    public class SeekListener implements SeekBar.OnSeekBarChangeListener {
+
+        public SeekListener() {
+            Log.d(TAG, "Listener Initialized");
+        }
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+            mSensibilite = progress / 10;
+            localBinder.setSensibility(mSensibilite);
+            refresh();
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+
+        }
+    }
 }

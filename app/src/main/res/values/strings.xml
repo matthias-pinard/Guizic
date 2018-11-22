@@ -7,4 +7,7 @@
     <string name="filter_view_http_gizmos">Filter Guizic</string>
     <string name="channel_description">Guizic channel</string>
     <string name="channel_name">GUIZIC</string>
+    <string name="title_location_permission">Autorisation d\'accés au GPS</string>
+    <string name="text_location_permission">Pour fonctionner Guizic à besoin de pouvoir accéder au GPS</string>
+    <string name="ok">Ok</string>
 </resources>
