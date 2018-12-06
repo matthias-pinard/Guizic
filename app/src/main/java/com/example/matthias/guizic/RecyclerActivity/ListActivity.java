@@ -40,14 +40,6 @@ import java.util.List;
          // specify an adapter (see also next example)
          mAdapter = new MyAdaptater(myDataset);
          mRecyclerView.setAdapter(mAdapter);
-
-         FloatingActionButton fab = findViewById(R.id.fab);
-         fab.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 onClickAdd(view);
-             }
-         });
      }
 
      protected  void onClickAdd(View view) {

@@ -7,5 +7,10 @@
     <Button
         android:id="@+id/button_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="96dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="sans-serif"
+        android:includeFontPadding="true"
+        android:textSize="24sp"
+        android:layout_margin="12sp"/>
 </LinearLayout>
