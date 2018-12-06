@@ -24,7 +24,7 @@ public class MyService extends Service {
     private GpsSimple.GpsChangeListener mActivityListener;
     private int NOTIFICATION = R.string.local_service_started;
 
-    private double mSensibilite = 0.7;
+    private double mSensibilite = 1;
     private MusicsManager mMusicsManager;
 
     private boolean mIsActivityListenerActive = false;
@@ -33,7 +33,9 @@ public class MyService extends Service {
         GpsSimple getGps() {
             return mGps;
         }
-
+        MusicsManager getMusicManager() {
+            return mMusicsManager;
+        }
         public void activateListener() {
             mIsActivityListenerActive = true;
         }
@@ -48,6 +50,10 @@ public class MyService extends Service {
 
         public void setSensibility(double sensibility) {
             mSensibilite = sensibility;
+        }
+
+        public double getSensibility() {
+            return mSensibilite;
         }
     }
 
@@ -140,13 +146,13 @@ public class MyService extends Service {
     }
 
     public void gpsListener() {
-            double dist = mGps.getDistanceToDestination();
-            Log.d(TAG, "max volume" + mMusicsManager.getMaxVolume());
-            double vol = mMusicsManager.getMaxVolume() - dist * mSensibilite;
-            Log.d(TAG, "distance" + dist);
-            Log.d(TAG, "Vol" + vol);
-            //Log.d("Destination", mGps.getDestination().toString());
-            mMusicsManager.setVolume( vol);
+        double dist = mGps.getDistanceToDestination();
+        Log.d(TAG, "max volume" + mMusicsManager.getMaxVolume());
+        double vol = mMusicsManager.getMaxVolume() - dist * mSensibilite;
+        Log.d(TAG, "distance" + dist);
+        Log.d(TAG, "Vol" + vol);
+        //Log.d("Destination", mGps.getDestination().toString());
+        mMusicsManager.setVolume( vol);
     }
 
     public void playWinMusic()

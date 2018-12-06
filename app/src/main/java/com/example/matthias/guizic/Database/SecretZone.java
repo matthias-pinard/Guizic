@@ -3,6 +3,8 @@ package com.example.matthias.guizic.Database;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.content.Context;
+import android.content.res.AssetManager;
 
 @Entity
 public class SecretZone {
@@ -92,4 +94,5 @@ public class SecretZone {
         };
         return s;
     }
+
 }

@@ -34,6 +34,7 @@ public class MusicsManager {
 
     public void setVolume(double volume) {
 
+        mVolume = volume;
         Log.d("Volume", "" + volume);
         for (MediaPlayer mediaPlayer : mListMedia) {
             boolean init = false;

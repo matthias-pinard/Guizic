@@ -26,7 +26,7 @@ public class GpsActivity extends AppCompatActivity {
     private Location mDestination;
     private boolean mIsDestInit = false;
     private Intent mIntent;
-    private double mSensibilite = 1.3;
+    private double mSensibilite = 0;
 
     private int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private boolean mIsBound;
@@ -34,8 +34,7 @@ public class GpsActivity extends AppCompatActivity {
     private boolean mBoundState;
 
     private GpsSimple mGps;
-
-    private SeekBar mSeekBar;
+    private MusicsManager mMusicsManager;
 
     private GpsSimple.GpsChangeListener mGpsChangeListener = new GpsSimple.GpsChangeListener() {
         @Override
@@ -51,7 +50,9 @@ public class GpsActivity extends AppCompatActivity {
         public void onServiceConnected (ComponentName className, IBinder binder) {
             localBinder = (MyService.LocalBinder) binder;
             mGps = localBinder.getGps();
+            mMusicsManager = localBinder.getMusicManager();
             localBinder.setGpsListener(mGpsChangeListener);
+            localBinder.setSensibility(mSensibilite);
             localBinder.activateListener();
             mGps.setDestination(mDestination);
 
@@ -88,6 +89,7 @@ public class GpsActivity extends AppCompatActivity {
         else {
             double longitude = mIntent.getDoubleExtra("longitude", -1);
             double latitude = mIntent.getDoubleExtra("latitude", -1);
+            mSensibilite = mIntent.getDoubleExtra("sensibilite", 1);
             Log.d(TAG, "Latitude : " + latitude + ", longitude : " + longitude);
             mDestination.setLatitude(latitude);
             mDestination.setLongitude(longitude);
@@ -138,11 +140,20 @@ public class GpsActivity extends AppCompatActivity {
 
     public void refresh() {
 
+        int nbBoucle = (int)(mMusicsManager.getVolume() / 100) + 1;
+        int max = (int) (mMusicsManager.getMaxVolume() / 100) + 1;
+        String str = "" + nbBoucle + "/" + max;
         String distance = String.format("%.2f", mGps.getDistanceToDestination());
+        str += "\nDist: " + distance + "m";
+        str += "\nVol: " + (int)mMusicsManager.getVolume();
+        str += "\nSens: " + mSensibilite;
         TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
-        textViewDistance.setText(String.valueOf(distance));
+        textViewDistance.setText(String.valueOf(str));
 
-        Log.d(TAG, "Distance : " + mGps.getDistanceToDestination());
+//        TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
+//        textViewDistance.setText(String.valueOf(distance));
+//
+//        Log.d(TAG, "Distance : " + mGps.getDistanceToDestination());
     }
 
     public boolean requestPermission() {
@@ -186,34 +197,5 @@ public class GpsActivity extends AppCompatActivity {
         }
     }
 
-    public void initSeekBar() {
-        mSeekBar = findViewById(R.id.seekBarSensi);
-        mSeekBar.setMax(3);
-        mSeekBar.setProgress(1);
-//        mSeekBar.setOnSeekBarChangeListener(new SeekListener());
-    }
 
-    public class SeekListener implements SeekBar.OnSeekBarChangeListener {
-
-        public SeekListener() {
-            Log.d(TAG, "Listener Initialized");
-        }
-
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-            mSensibilite = progress / 10;
-            localBinder.setSensibility(mSensibilite);
-            refresh();
-        }
-
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-
-        }
-
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-
-        }
-    }
 }

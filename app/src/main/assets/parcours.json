@@ -1,0 +1,48 @@
+{
+  "name" : "Test Guizic",
+  "parcours" : [
+    {
+      "secretName": "E",
+      "realName" : "Esir",
+      "latitude" : 48.118096,
+      "longitude" : -1.636408,
+      "sensibilite" : 10
+    },
+    {
+      "secretName": "C",
+      "realName": "Cafeteria",
+      "latitude": 48.118464,
+      "longitude": -1.635913,
+      "sensibilite": 10
+    },
+    {
+      "secretName": "Pi Parcours 1",
+      "realName": "Batiment 28-31",
+      "latitude": 48.119995,
+      "longitude": -1.639111,
+      "sensibilite": 2
+    },
+    {
+      "secretName": "Pi parcours 2",
+      "realName": "Batiment 11",
+      "latitude": 48.116347,
+      "longitude": -1.639824,
+      "sensibilite": 2
+    },
+    {
+      "secretName": "Pi parcours 3",
+      "realName": "Batiment 1A, 8B",
+      "latitude": 48.115521,
+      "longitude": -1.636599,
+      "sensibilite": 2
+    },
+    {
+      "secretName": "PF",
+      "realName": "Batiment 13, 14, 15",
+      "latitude": 48.117062,
+      "longitude": -1.637597,
+      "sensibilite": 2
+    }
+
+  ]
+}

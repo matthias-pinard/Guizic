@@ -24,6 +24,7 @@ public class GpsSimple {
     private GpsChangeListener mGpsChangeListener;
     private boolean listenerIsActive = false;
 
+
     public GpsSimple(Context context) {
         mContext = context;
 
