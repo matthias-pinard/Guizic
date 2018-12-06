@@ -39,7 +39,7 @@ public abstract class AppDatabase extends RoomDatabase {
                         List<SecretZone> lZone = new ArrayList<SecretZone>();
                         JsonReaderUtils jsonReader = new JsonReaderUtils(context);
                         String json = jsonReader.readJsonFile();
-                        lZone = jsonReader.parseJsonFile();
+                        lZone = jsonReader.parseJsonFileZone();
                         SecretZone[] secretZones = {};
                         secretZones = lZone.toArray(secretZones);
                         getInstance(context).
