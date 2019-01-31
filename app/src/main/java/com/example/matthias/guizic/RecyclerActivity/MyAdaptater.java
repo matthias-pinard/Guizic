@@ -50,6 +50,7 @@ public class MyAdaptater extends RecyclerView.Adapter<MyAdaptater.MyViewHolder> 
             intent.putExtra("latitude", secretZone.getLatitude());
             intent.putExtra("longitude", secretZone.getLongitude());
             intent.putExtra("sensibilite", secretZone.getSensibilite());
+            intent.putExtra("name", secretZone.getSecretName());
             context.startActivity(intent);
         });
     }

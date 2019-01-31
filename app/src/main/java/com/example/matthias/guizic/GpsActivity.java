@@ -28,13 +28,16 @@ public class GpsActivity extends AppCompatActivity {
     private Intent mIntent;
     private double mSensibilite = 0;
 
-    private int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    private final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private boolean mIsBound;
 
     private boolean mBoundState;
 
     private GpsSimple mGps;
     private MusicsManager mMusicsManager;
+
+    private String mName;
 
     private GpsSimple.GpsChangeListener mGpsChangeListener = new GpsSimple.GpsChangeListener() {
         @Override
@@ -89,6 +92,7 @@ public class GpsActivity extends AppCompatActivity {
         else {
             double longitude = mIntent.getDoubleExtra("longitude", -1);
             double latitude = mIntent.getDoubleExtra("latitude", -1);
+            mName = mIntent.getStringExtra("name");
             mSensibilite = mIntent.getDoubleExtra("sensibilite", 1);
             Log.d(TAG, "Latitude : " + latitude + ", longitude : " + longitude);
             mDestination.setLatitude(latitude);
@@ -96,12 +100,7 @@ public class GpsActivity extends AppCompatActivity {
             mIsDestInit = true;
         }
 
-        boolean perm = requestPermission();
-        Log.d(TAG, "Permission: " + String.valueOf(perm));
-        if (perm) {
-            doBindService();
-        }
-
+        requestPermission();
     }
 
     @Override
@@ -110,9 +109,11 @@ public class GpsActivity extends AppCompatActivity {
 
     }
 
-    protected void onStop() {
-        super.onStop();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         doUnbindService();
+        mMusicsManager.stop();
     }
 
     void doBindService() {
@@ -130,22 +131,15 @@ public class GpsActivity extends AppCompatActivity {
         }
     }
 
-    void requestLocationRigth() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                    1);
-        }
-    }
-
     public void refresh() {
 
         int nbBoucle = (int)(mMusicsManager.getVolume() / 100) + 1;
         int max = (int) (mMusicsManager.getMaxVolume() / 100) + 1;
-        String str = "" + nbBoucle + "/" + max;
+        String str = mName ;
+        str += "\n\n" + nbBoucle + "/" + max;
         String distance = String.format("%.2f", mGps.getDistanceToDestination());
-        str += "\nDist: " + distance + "m";
-        str += "\nVol: " + (int)mMusicsManager.getVolume();
+//        str += "\nDist: " + distance + "m";
+//        str += "\nVol: " + (int)mMusicsManager.getVolume();
         str += "\nSens: " + mSensibilite;
         TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
         textViewDistance.setText(String.valueOf(str));
@@ -193,7 +187,26 @@ public class GpsActivity extends AppCompatActivity {
             }
             return false;
         } else {
-           return true;
+            doBindService();
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION :{
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted
+                    doBindService();
+                } else {
+                    finish();
+                }
+                return;
+            }
         }
     }
 

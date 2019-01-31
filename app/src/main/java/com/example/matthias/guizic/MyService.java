@@ -141,8 +141,8 @@ public class MyService extends Service {
         mMusicsManager = new MusicsManager();
         mMusicsManager.addMediaPlayer(bass);
         mMusicsManager.addMediaPlayer(drum);
-        mMusicsManager.addMediaPlayer(pad);
         mMusicsManager.addMediaPlayer(synthLead);
+        mMusicsManager.addMediaPlayer(pad);
     }
 
     public void gpsListener() {
@@ -153,10 +153,14 @@ public class MyService extends Service {
         Log.d(TAG, "Vol" + vol);
         //Log.d("Destination", mGps.getDestination().toString());
         mMusicsManager.setVolume( vol);
+        if(dist < 6 && !isArrived) {
+            playWinMusic();
+        }
     }
 
     public void playWinMusic()
     {
+        isArrived = true;
         MediaPlayer musicWin = MediaPlayer.create(this, R.raw.no_hablo);
         mMusicsManager.setVolume(0);
         musicWin.start();

@@ -13,8 +13,8 @@ public interface ParcoursDao {
     List<SecretZone> getAll();
 
     @Query("Select * from SecretZone Where uid = " +
-            "(Select * from Parcours Where idparcours = (:id) Order By ordre)")
-    List<SecretZone> getParcours(int id);
+            "(Select uid from Parcours Where nameParcours=(:name) Order By ordre)")
+    List<SecretZone> getParcours(String name);
 
     @Delete
     void delete(Parcours parcours);

@@ -10,34 +10,13 @@ public class Parcours {
     private int uid;
 
     @ColumnInfo
-    private int idparcours;
+    private String nameParcours;
 
     @ColumnInfo
-    private int idzone;
+    private String nameZone;
 
     @ColumnInfo
     private int ordre;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @ColumnInfo
-    private String name;
-
-    public int getOrdre() {
-        return ordre;
-    }
-
-    public void setOrdre(int ordre) {
-        this.ordre = ordre;
-    }
-
-
 
     public int getUid() {
         return uid;
@@ -47,26 +26,33 @@ public class Parcours {
         this.uid = uid;
     }
 
-    public int getIdparcours() {
-        return idparcours;
+    public String getNameParcours() {
+        return nameParcours;
     }
 
-    public void setIdparcours(int idparcours) {
-        this.idparcours = idparcours;
+    public void setNameParcours(String nameParcours) {
+        this.nameParcours = nameParcours;
     }
 
-    public int getIdzone() {
-        return idzone;
+    public String getNameZone() {
+        return nameZone;
     }
 
-    public void setIdzone(int idzone) {
-        this.idzone = idzone;
+    public void setNameZone(String nameZone) {
+        this.nameZone = nameZone;
     }
 
-    public Parcours(int idparcours, int idzone, int ordre, String name){
-        this.idparcours = idparcours;
-        this.idzone = idzone;
+    public int getOrdre() {
+        return ordre;
+    }
+
+    public void setOrdre(int ordre) {
         this.ordre = ordre;
-        this.name = name;
+    }
+
+    public Parcours(String nameParcours, String nameZone, int ordre){
+        this.nameParcours = nameParcours;
+        this.nameZone = nameZone;
+        this.ordre = ordre;
     }
 }

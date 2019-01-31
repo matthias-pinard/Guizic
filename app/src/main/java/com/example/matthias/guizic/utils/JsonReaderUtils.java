@@ -3,6 +3,7 @@ package com.example.matthias.guizic.utils;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+import com.example.matthias.guizic.Database.Parcours;
 import com.example.matthias.guizic.Database.SecretZone;
 
 import org.json.JSONArray;
@@ -72,26 +73,26 @@ public class JsonReaderUtils {
         return lZone;
     }
 
-/*    public List<SecretZone> parseJsonFileParcours() {
+    public List<Parcours> parseJsonFileParcours() {
         String json = readJsonFile();
-        List<SecretZone> lZone = new ArrayList<>();
+        List<Parcours> lParcours = new ArrayList<>();
         try {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray jsonArray = jsonObject.getJSONArray("parcours");
-            String name =
+
             for(int i = 0; i < jsonArray.length(); i++) {
-                JSONObject parcours = jsonArray.getJSONObject(i);
-                double latitude = parcours.getDouble("latitude");
-                double longitude = parcours.getDouble("longitude");
-                double sensibilite = parcours.getDouble("sensibilite");
-                String realName = parcours.getString("realName");
-                String secretName = parcours.getString("secretName");
-                SecretZone secretZone = new SecretZone(longitude, latitude, sensibilite, realName, secretName);
-                lZone.add(secretZone);
+                JSONObject parcour = jsonArray.getJSONObject(i);
+                String name = parcour.getString("name");
+                JSONArray lZones = parcour.getJSONArray("zones");
+                for(int j = 0; j < lZones.length(); j++) {
+                    String zone = lZones.getString(j);
+                    Parcours p = new Parcours(name, zone, j);
+                    lParcours.add(p);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return lZone;
-    }*/
+        return lParcours;
+    }
 }

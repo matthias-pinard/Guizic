@@ -15,6 +15,9 @@ public interface SecretZoneDao {
     @Query("Select * from SecretZone where uid=(:uid)")
     SecretZone findById(int uid);
 
+    @Query("Select uid from SecretZone where realName=(:name)")
+    int findIdByName(String name);
+
     @Insert
     void insertAll(SecretZone... secretZones);
 

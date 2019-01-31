@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
+import com.example.matthias.guizic.Database.AppDatabase;
 import com.example.matthias.guizic.RecyclerActivity.ListActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        AppDatabase.getInstance(this).secretZoneDao().getAll();
         initMusic();
         mSeekBar = findViewById(R.id.seekBar);
         mSeekBar.setMax(mMusicsManager.getNBMediaPlayer() * 100);
