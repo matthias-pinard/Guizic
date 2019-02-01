@@ -6,12 +6,6 @@ import android.location.Location;
 public abstract class Gps {
     private final String TAG = "GPS_DEBUG";
 
-    public Context getContext() {
-        return mContext;
-    }
-
-    private Context mContext;
-
     private Location mDestination;
     private float mDistanceDestination;
     private GpsChangeListener mGpsChangeListener;
@@ -26,12 +20,6 @@ public abstract class Gps {
         return mDistanceDestination;
     }
 
-    public Location getDestination() {
-        return mDestination;
-    }
-
-
-
     public void setListenerActive(boolean value) {
         listenerIsActive = value;
     }
@@ -39,6 +27,7 @@ public abstract class Gps {
     public void setGpsChangeListener(GpsChangeListener gpsChangeListener) {
         mGpsChangeListener = gpsChangeListener;
     }
+
     public interface GpsChangeListener {
         void onCHangeDo();
     }

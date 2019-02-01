@@ -32,6 +32,12 @@ public class MusicsManager {
 
     }
 
+    public void addMediaPlayer(List<MediaPlayer> mediaPlayers) {
+        mListMedia.addAll(mediaPlayers);
+        nbMediaPlayer += mediaPlayers.size();
+        maxVolume = pasVolume * nbMediaPlayer;
+    }
+
     public void setVolume(double volume) {
 
         mVolume = volume;
@@ -74,6 +80,12 @@ public class MusicsManager {
     public void stop() {
         for(MediaPlayer mediaPlayer : mListMedia) {
             mediaPlayer.stop();
+        }
+    }
+
+    public void release() {
+        for(MediaPlayer mediaPlayer : mListMedia) {
+            mediaPlayer.release();
         }
     }
 

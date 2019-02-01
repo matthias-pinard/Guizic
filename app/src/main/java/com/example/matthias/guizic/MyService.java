@@ -6,22 +6,28 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.location.Location;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.support.constraint.solver.Goal;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyService extends Service {
     private static final String CHANNEL_ID = "GUIZIC";
     static private  String TAG = "DEBUG_SERVICE";
     private NotificationManager mNM;
     private LocalBinder mBinder = new LocalBinder();
-    private GpsSimple mGps;
+    private GPSGoogle mGps;
     private boolean isArrived = false;
-    private GpsSimple.GpsChangeListener mActivityListener;
+    private GPSGoogle.GpsChangeListener mActivityListener;
+    private Location mDestination;
     private int NOTIFICATION = R.string.local_service_started;
 
     private double mSensibilite = 1;
@@ -30,7 +36,7 @@ public class MyService extends Service {
     private boolean mIsActivityListenerActive = false;
 
     public class LocalBinder extends Binder {
-        GpsSimple getGps() {
+        GPSGoogle getGps() {
             return mGps;
         }
         MusicsManager getMusicManager() {
@@ -44,12 +50,17 @@ public class MyService extends Service {
            mIsActivityListenerActive = false;
         }
 
-        public void setGpsListener(GpsSimple.GpsChangeListener gpsListener) {
+        public void setGpsListener(GPSGoogle.GpsChangeListener gpsListener) {
             mActivityListener = gpsListener;
         }
 
+
         public void setSensibility(double sensibility) {
             mSensibilite = sensibility;
+        }
+
+        public void setDestination(Location location) {
+            mDestination = location;
         }
 
         public double getSensibility() {
@@ -60,7 +71,7 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         promptForGps();
-        mGps = new GpsSimple(this);
+        mGps = new GPSGoogle(this, mDestination, mGpsChangeListener);
         mGps.setGpsChangeListener(mGpsChangeListener);
         mGps.setListenerActive(true);
 
@@ -133,16 +144,19 @@ public class MyService extends Service {
     }
 
     public void initMusic() {
-        MediaPlayer bass = MediaPlayer.create(this, R.raw.bass);
-        MediaPlayer drum = MediaPlayer.create(this, R.raw.drum);
-        MediaPlayer pad = MediaPlayer.create(this, R.raw.pad);
-        MediaPlayer synthLead = MediaPlayer.create(this, R.raw.synth_lead);
+        List<MediaPlayer> mediasPlayers = new ArrayList<MediaPlayer>();
+        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte1));
+        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte2));
+        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte3));
+        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte4));
+        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte5));
+        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte6));
+        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte7));
+        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte8));
+
 
         mMusicsManager = new MusicsManager();
-        mMusicsManager.addMediaPlayer(bass);
-        mMusicsManager.addMediaPlayer(drum);
-        mMusicsManager.addMediaPlayer(synthLead);
-        mMusicsManager.addMediaPlayer(pad);
+        mMusicsManager.addMediaPlayer(mediasPlayers);
     }
 
     public void gpsListener() {
@@ -161,11 +175,11 @@ public class MyService extends Service {
     public void playWinMusic()
     {
         isArrived = true;
-        MediaPlayer musicWin = MediaPlayer.create(this, R.raw.no_hablo);
+        MediaPlayer musicWin = MediaPlayer.create(this, R.raw.music_win);
         mMusicsManager.setVolume(0);
         musicWin.start();
     }
-    private GpsSimple.GpsChangeListener mGpsChangeListener = new GpsSimple.GpsChangeListener(){
+    private GPSGoogle.GpsChangeListener mGpsChangeListener = new GPSGoogle.GpsChangeListener(){
 
         @Override
         public void onCHangeDo() {

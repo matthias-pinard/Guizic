@@ -56,6 +56,7 @@ public class GpsActivity extends AppCompatActivity {
             mMusicsManager = localBinder.getMusicManager();
             localBinder.setGpsListener(mGpsChangeListener);
             localBinder.setSensibility(mSensibilite);
+            localBinder.setDestination(mDestination);
             localBinder.activateListener();
             mGps.setDestination(mDestination);
 
@@ -114,6 +115,7 @@ public class GpsActivity extends AppCompatActivity {
         super.onDestroy();
         doUnbindService();
         mMusicsManager.stop();
+        mMusicsManager.release();
     }
 
     void doBindService() {
