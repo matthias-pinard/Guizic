@@ -41,14 +41,21 @@ public class MusicsManager {
     public void setVolume(double volume) {
 
         mVolume = volume;
-        Log.d("Volume", "" + volume);
+        boolean init = false;
+
         for (MediaPlayer mediaPlayer : mListMedia) {
-            boolean init = false;
+            if(mVolume < 0) {
+                volume = 0;
+                mediaPlayer.setVolume(0, 0);
+                continue;
+            }
             if (volume >= pasVolume) {
                 mediaPlayer.setVolume(1, 1);
                 volume -= pasVolume;
             } else if (!init) {
-                float vol = (float) (1 - (Math.log(100 - volume) / Math.log(100)));
+                final float offset = 20;
+                volume += offset;
+                float vol = (float) (1 - (Math.log(100 - volume / (1 + offset / 100)) / Math.log(100)));
                 mediaPlayer.setVolume(vol, vol);
                 volume = 0;
                 init = true;

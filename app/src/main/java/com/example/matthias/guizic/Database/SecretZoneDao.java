@@ -23,4 +23,7 @@ public interface SecretZoneDao {
 
     @Delete
     void delete(SecretZone secretZone);
+
+    @Query("DELETE FROM SecretZone")
+    void deleteAll();
 }

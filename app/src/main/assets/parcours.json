@@ -1,7 +1,20 @@
 {
   "name" : "Test Guizic",
   "zones" : [
-
+    {
+      "secretName": "Point test",
+      "realName": "f",
+      "latitude": 48.117150,
+      "longitude": -1.633946,
+      "sensibilite": 2
+    },
+    {
+      "secretName": "Point Benoît",
+      "realName": "f",
+      "latitude": 48.124786,
+      "longitude": -1.639900,
+      "sensibilite": 1.8
+    },
     {
       "secretName": "Pi Parcours 1",
       "realName": "Pi Parcours 1",
@@ -43,6 +56,20 @@
       "latitude": 48.118464,
       "longitude": -1.635913,
       "sensibilite": 2
+    },
+    {
+      "secretName": "Rennes2",
+      "realName": "Rennes2 Galerie art et essai",
+      "latitude": 48.120091,
+      "longitude": -1.700433,
+      "sensibilite": 2
+    },
+    {
+      "secretName": "P Tugdual",
+      "realName": "Point Tugdual",
+      "latitude": 48.115383,
+      "longitude": -1.636920,
+      "sensibilite":2
     }
   ],
 

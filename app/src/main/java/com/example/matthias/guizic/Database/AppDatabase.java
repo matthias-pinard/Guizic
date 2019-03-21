@@ -35,17 +35,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(TAG, "Pre-populate");
-                        List<SecretZone> lZone = new ArrayList<SecretZone>();
-                        JsonReaderUtils jsonReader = new JsonReaderUtils(context);
-                        String json = jsonReader.readJsonFile();
-                        lZone = jsonReader.parseJsonFileZone();
-                        SecretZone[] secretZones = {};
-                        secretZones = lZone.toArray(secretZones);
-                        getInstance(context).
-                                secretZoneDao().
-                                insertAll(secretZones);
-                        Log.d(TAG, "Pre-populated");
+                        loadJson(context);
                     }
                 });
             }
@@ -53,6 +43,20 @@ public abstract class AppDatabase extends RoomDatabase {
         return Room.databaseBuilder(context,
                 AppDatabase.class,
                 "my-database").addCallback(rdc).allowMainThreadQueries().build();
+    }
+
+    public static void loadJson(final Context context) {
+        Log.d(TAG, "Pre-populate");
+        List<SecretZone> lZone = new ArrayList<SecretZone>();
+        JsonReaderUtils jsonReader = new JsonReaderUtils(context);
+        String json = jsonReader.readJsonFile();
+        lZone = jsonReader.parseJsonFileZone();
+        SecretZone[] secretZones = {};
+        secretZones = lZone.toArray(secretZones);
+        getInstance(context).
+                secretZoneDao().
+                insertAll(secretZones);
+        Log.d(TAG, "Pre-populated");
     }
 
 }

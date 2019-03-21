@@ -24,13 +24,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         AppDatabase.getInstance(this).secretZoneDao().getAll();
     }
 
     
     public void onClickListActivity(View view) {
         Intent intent = new Intent(this, ListActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickResetDatabase(View view) {
+        AppDatabase.getInstance(this).secretZoneDao().deleteAll();
+        AppDatabase.loadJson(this);
+    }
+
+    public void onClickAddZone(View view) {
+        Intent intent = new Intent(this, AddZone.class);
         startActivity(intent);
     }
 }

@@ -2,7 +2,7 @@
     <string name="app_name">Guizic</string>
     <string name="button_play_sound">Play sound</string>
     <string name="label_no_hablo">No hablo</string>
-    <string name="local_service_started">Guizic en cour d\'execution</string>
+    <string name="local_service_started">Guizic en cours d\'exécution</string>
     <string name="local_service_label">Guizic</string>
     <string name="filter_view_http_gizmos">Filter Guizic</string>
     <string name="channel_description">Guizic channel</string>
@@ -10,4 +10,9 @@
     <string name="title_location_permission">Autorisation d\'accés au GPS</string>
     <string name="text_location_permission">Pour fonctionner Guizic à besoin de pouvoir accéder au GPS</string>
     <string name="ok">Ok</string>
+
+    <string name="addZoneName">Name</string>
+    <string name="addZoneLatitude">Latidute</string>
+    <string name="addZoneLongitude">Longitude</string>
+    <string name="addZoneDistance">Distance (par rapport au point de départ)</string>
 </resources>

@@ -72,7 +72,6 @@ public class MyService extends Service {
     public void onCreate() {
         promptForGps();
         mGps = new GPSGoogle(this, mDestination, mGpsChangeListener);
-        mGps.setGpsChangeListener(mGpsChangeListener);
         mGps.setListenerActive(true);
 
 
@@ -150,9 +149,6 @@ public class MyService extends Service {
         mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte3));
         mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte4));
         mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte5));
-        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte6));
-        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte7));
-        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte8));
 
 
         mMusicsManager = new MusicsManager();
@@ -161,15 +157,13 @@ public class MyService extends Service {
 
     public void gpsListener() {
         double dist = mGps.getDistanceToDestination();
-        Log.d(TAG, "max volume" + mMusicsManager.getMaxVolume());
         double vol = mMusicsManager.getMaxVolume() - dist * mSensibilite;
-        Log.d(TAG, "distance" + dist);
-        Log.d(TAG, "Vol" + vol);
-        //Log.d("Destination", mGps.getDestination().toString());
         mMusicsManager.setVolume( vol);
-        if(dist < 6 && !isArrived) {
+        if(dist < 10 && !isArrived) {
             playWinMusic();
         }
+        Log.d("DISTANCE", "d: " + dist + " maxVol: " + vol);
+
     }
 
     public void playWinMusic()
@@ -177,6 +171,8 @@ public class MyService extends Service {
         isArrived = true;
         MediaPlayer musicWin = MediaPlayer.create(this, R.raw.music_win);
         mMusicsManager.setVolume(0);
+        mMusicsManager.stop();
+        mGps.stopLocationUpdate();
         musicWin.start();
     }
     private GPSGoogle.GpsChangeListener mGpsChangeListener = new GPSGoogle.GpsChangeListener(){

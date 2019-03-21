@@ -12,6 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MapPicker"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA9SW8MwZG-xM_aop86l3d3e-B_PObU2y8" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GpsActivity">
+        <activity
+            android:name=".GpsActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -46,7 +54,7 @@
         <service android:name=".MyService" />
 
         <activity android:name=".RecyclerActivity.ListActivity" />
-        <activity android:name=".AddZone"></activity>
+        <activity android:name=".AddZone" />
     </application>
 
 </manifest>

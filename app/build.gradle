@@ -46,4 +46,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     implementation 'com.google.android.gms:play-services-location:16.0.0'
+
 }
