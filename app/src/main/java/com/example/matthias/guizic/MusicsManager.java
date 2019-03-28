@@ -53,7 +53,7 @@ public class MusicsManager {
                 mediaPlayer.setVolume(1, 1);
                 volume -= pasVolume;
             } else if (!init) {
-                final float offset = 20;
+                final float offset = 5;
                 volume += offset;
                 float vol = (float) (1 - (Math.log(100 - volume / (1 + offset / 100)) / Math.log(100)));
                 mediaPlayer.setVolume(vol, vol);

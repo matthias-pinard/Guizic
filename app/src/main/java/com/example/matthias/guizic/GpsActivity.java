@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.IBinder;
-import android.provider.Contacts;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -133,6 +132,19 @@ public class GpsActivity extends AppCompatActivity {
     public void refresh() {
         int nbBoucle = (int)(mMusicsManager.getVolume() / 100) + 1;
         int max = (int) (mMusicsManager.getMaxVolume() / 100) + 1;
+        String str = mName ;
+        str += "\n\n" + nbBoucle + "/" + (max - 1);
+//        String distance = String.format("%.2f", mGps.getDistanceToDestination());
+//        str += "\nDist: " + distance + "m";
+//        str += "\nVol: " + (int)mMusicsManager.getVolume();
+        str += "\nSens: " + mSensibilite;
+        TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
+        textViewDistance.setText(String.valueOf(str));
+
+//        TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
+//        textViewDistance.setText(String.valueOf(distance));
+//
+//        Log.d(TAG, "Distance : " + mGps.getDistanceToDestination());
     }
 
     public boolean requestPermission() {

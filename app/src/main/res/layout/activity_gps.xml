@@ -6,54 +6,21 @@
     android:layout_height="match_parent"
     tools:context="com.example.matthias.guizic.GpsActivity">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="209dp"
+    <TextView
+        android:id="@+id/textViewDestination"
+        android:layout_width="344dp"
+        android:layout_height="286dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="monospace"
+        android:text="Yo"
+        android:textAlignment="center"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/cercle5"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="134dp" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/cercle4"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="134dp" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/cercle3"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="134dp" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/cercle2"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="134dp" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/cercle1"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="134dp" />
-
-
-    </FrameLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
