@@ -40,7 +40,6 @@ public class MyAdaptater extends RecyclerView.Adapter<MyAdaptater.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        // TODO use secret name
         final SecretZone secretZone = mDataset.get(position);
         final Context context = holder.mButton.getContext();
         String name = secretZone.getSecretName();
