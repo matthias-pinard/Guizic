@@ -12,7 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MapPicker"></activity>
+        <activity
+            android:name=".AddSounds"
+            android:label="@string/title_activity_add_sounds"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".MapPicker" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

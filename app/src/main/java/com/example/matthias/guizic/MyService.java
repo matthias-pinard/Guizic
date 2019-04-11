@@ -13,8 +13,9 @@ import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.support.constraint.solver.Goal;
 import android.util.Log;
+
+import com.example.matthias.guizic.Gps.GPSGoogle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +95,7 @@ public class MyService extends Service {
     @Override
     public void onDestroy() {
         // On annule la notification
+        mGps.stopLocationUpdate();
         mNM.cancel(NOTIFICATION);
     }
     @Override

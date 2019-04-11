@@ -1,5 +1,6 @@
 package com.example.matthias.guizic;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.example.matthias.guizic.R;
 
 public class AddZone extends AppCompatActivity {
 
+    public final int REQUEST_CODE = 222;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,5 +36,10 @@ public class AddZone extends AppCompatActivity {
         SecretZone secretZone = new SecretZone(longitude, latitude, sensibilite, name, name);
         AppDatabase.getInstance(this).secretZoneDao().insertAll(secretZone);
         finish();
+    }
+
+    public void onClickPickLocation(View view) {
+        Intent intent = new Intent(this, MapPicker.class);
+        startActivityForResult(intent, REQUEST_CODE);
     }
 }

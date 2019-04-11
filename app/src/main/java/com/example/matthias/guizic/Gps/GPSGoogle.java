@@ -1,18 +1,14 @@
-package com.example.matthias.guizic;
+package com.example.matthias.guizic.Gps;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 
-import com.example.matthias.guizic.Gps;
-import com.example.matthias.guizic.GpsSimple;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 public class GPSGoogle {
     private Context mContext;

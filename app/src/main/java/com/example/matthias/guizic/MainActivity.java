@@ -42,4 +42,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddZone.class);
         startActivity(intent);
     }
+
+    public void onClickAddSound(View view) {
+        Intent intent = new Intent(this, AddSounds.class);
+        startActivity(intent);
+    }
 }

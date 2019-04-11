@@ -107,6 +107,20 @@
         app:layout_constraintTop_toBottomOf="@+id/LabelLongitude" />
 
     <Button
+        android:id="@+id/buttonPicPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="onClickPickLocation"
+        android:text="Pick position"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputDistance" />
+
+    <Button
         android:id="@+id/buttonSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -114,9 +128,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:onClick="onCLick"
-        android:text="Button"
+        android:text="@string/button_add_sound"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputDistance" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonPicPosition" />
+
 
 </android.support.constraint.ConstraintLayout>

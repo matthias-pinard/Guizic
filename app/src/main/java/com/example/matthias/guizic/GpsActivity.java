@@ -19,6 +19,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.matthias.guizic.Gps.GPSGoogle;
+
 public class GpsActivity extends AppCompatActivity {
 
     private final String TAG = "GPS_ACTIVITY_DEBUG";

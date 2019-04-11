@@ -14,13 +14,15 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {SecretZone.class,  Parcours.class}, version = 1, exportSchema = false)
+@Database(entities = {SecretZone.class,  Sound.class, Piste.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static String TAG = "DEBUG";
     private static AppDatabase INSTANCE;
 
     public abstract SecretZoneDao secretZoneDao();
+    public abstract SoundDao soundDao();
+    public abstract PisteDao pisteDao();
 
     public synchronized static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {

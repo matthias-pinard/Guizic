@@ -1,4 +1,4 @@
-package com.example.matthias.guizic;
+package com.example.matthias.guizic.Gps;
 
 import android.content.Context;
 import android.location.Location;

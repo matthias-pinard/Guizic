@@ -1,4 +1,4 @@
-package com.example.matthias.guizic;
+package com.example.matthias.guizic.Gps;
 
 import android.Manifest;
 import android.content.Context;
