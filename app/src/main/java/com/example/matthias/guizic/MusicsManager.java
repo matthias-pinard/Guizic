@@ -25,6 +25,7 @@ public class MusicsManager {
 
     }
 
+    //TODO : Normaliser et arguments des fonctions à modifier
     public void addMediaPlayer(MediaPlayer mediaPlayer) {
         mListMedia.add(mediaPlayer);
         maxVolume += pasVolume;
