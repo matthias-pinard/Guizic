@@ -1,22 +1,26 @@
 package com.example.matthias.guizic;
 
 import android.annotation.SuppressLint;
-import android.location.Location;
-import android.app.Fragment;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
+import com.example.matthias.guizic.AddZone.AddZone;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapPicker extends AppCompatActivity implements OnMapReadyCallback {
+
+    LatLng mPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +33,13 @@ public class MapPicker extends AppCompatActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        updateMapPosition(googleMap);
+        googleMap.setOnMapClickListener(latLng -> {
+            googleMap.clear();
+            googleMap.addMarker(new MarkerOptions().position(latLng));
+            mPosition = latLng;
+        });
+            updateMapPosition(googleMap);
+
     }
 
     @SuppressLint("MissingPermission")
@@ -43,5 +53,14 @@ public class MapPicker extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
 
+    }
+
+    public void onClick(View view) {
+        Intent intent = new Intent();
+        Log.d("DDDBUG", "" + mPosition.longitude);
+        intent.putExtra("latitude", mPosition.latitude);
+        intent.putExtra("longitude", mPosition.longitude);
+        setResult(AddZone.RESULT_OK,  intent);
+        finish();
     }
 }

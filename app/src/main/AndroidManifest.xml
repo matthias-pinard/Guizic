@@ -58,7 +58,7 @@
         <service android:name=".MyService" />
 
         <activity android:name=".RecyclerActivity.ListActivity" />
-        <activity android:name=".AddZone" />
+        <activity android:name=".AddZone.AddZone" />
     </application>
 
 </manifest>

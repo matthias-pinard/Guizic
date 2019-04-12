@@ -3,6 +3,7 @@ package com.example.matthias.guizic.Database;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.database.Cursor;
 
 import java.util.List;
 
@@ -17,7 +18,10 @@ public interface SoundDao {
     @Query("SELECT * FROM Piste AS p WHERE p.sound_id=(:sound_id)")
     public List<Piste> getPistes(int sound_id);
 
-    @Query("SELECT MAX(uid) FROM sound")
+    @Query("SELECT MAX(_id) FROM sound")
     public int getMaxId();
+
+    @Query("SELECT * from sound")
+    public Cursor getCursor();
 
 }

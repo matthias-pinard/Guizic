@@ -1,16 +1,20 @@
-package com.example.matthias.guizic;
+package com.example.matthias.guizic.AddZone;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.matthias.guizic.Database.AppDatabase;
 import com.example.matthias.guizic.Database.SecretZone;
 import com.example.matthias.guizic.Database.Sound;
+import com.example.matthias.guizic.MapPicker;
 import com.example.matthias.guizic.R;
 
 import java.util.List;
@@ -23,6 +27,7 @@ public class AddZone extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_zone);
+        setSpinner();
     }
 
     public void onCLick(View view) {
@@ -62,9 +67,11 @@ public class AddZone extends AppCompatActivity {
         }
     }
 
-    public void getSoundList() {
-        AppDatabase db = AppDatabase.getInstance(this);
-        List<Sound> lSound = db.soundDao().getSounds();
-        CursorAdapter cursorAdapter = CursorAdapter.
+    public void setSpinner() {
+//        AppDatabase db = AppDatabase.getInstance(this);
+//        Cursor cursor = db.soundDao().getCursor();
+//        CursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.simple_spinner_item, null, R.id.spi)
+//        Spinner spinner = findViewById(R.id.inputSounds);
+//        spinner.setAdapter(cursorAdapter);
     }
 }
