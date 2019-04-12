@@ -11,6 +11,7 @@
     <string name="text_location_permission">Pour fonctionner Guizic à besoin de pouvoir accéder au GPS</string>
     <string name="ok">Ok</string>
     <string name="yo">Recherche du GPS en cours…</string>
+    <string name="main_page_text">Bienvenue</string>
 
     <string name="addZoneName">Name</string>
     <string name="addZoneLatitude">Latidute</string>
