@@ -8,9 +8,10 @@
         android:id="@+id/button_recycler"
         android:layout_width="match_parent"
         android:layout_height="96dp"
-        android:background="@color/colorAccent"
+        android:layout_margin="12sp"
+        android:background="@drawable/button_selector"
         android:fontFamily="sans-serif"
         android:includeFontPadding="true"
-        android:textSize="24sp"
-        android:layout_margin="12sp"/>
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
 </LinearLayout>
