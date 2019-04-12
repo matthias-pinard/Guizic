@@ -42,6 +42,7 @@ import java.util.List;
          mRecyclerView.setAdapter(mAdapter);
      }
 
+     //TODO : ça sert a rien ??
      protected  void onClickAdd(View view) {
          Intent intent = new Intent(this, AddZone.class);
          startActivity(intent);
