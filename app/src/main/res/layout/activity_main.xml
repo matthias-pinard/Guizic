@@ -27,23 +27,10 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/button_selector"
         android:onClick="onClickListActivity"
-        android:text="Liste des parcours"
+        android:text="@string/parcoursListButton"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         tools:layout_editor_absoluteX="8dp" />
-
-    <Button
-        android:id="@+id/button_list_activity2"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/main_page_button_size"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/button_selector"
-        android:onClick="onClickResetDatabase"
-        android:text="Reset database"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="48dp" />
 
     <Button
         android:id="@+id/button_list_activity3"
@@ -52,7 +39,7 @@
         android:layout_marginTop="@dimen/button_margin"
         android:background="@drawable/button_selector"
         android:onClick="onClickAddZone"
-        android:text="Ajout zone"
+        android:text="@string/addZoneButton"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         tools:layout_editor_absoluteX="8dp"
@@ -70,5 +57,18 @@
         android:textSize="18sp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="144dp" />
+
+    <Button
+        android:id="@+id/button_list_activity2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_page_button_size"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button_selector"
+        android:onClick="onClickResetDatabase"
+        android:text="Reset database"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="48dp" />
 
 </LinearLayout>

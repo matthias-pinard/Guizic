@@ -13,13 +13,18 @@
     <string name="yo">Recherche du GPS en cours…</string>
     <string name="main_page_text">Bienvenue</string>
 
-    <string name="addZoneName">Name</string>
-    <string name="addZoneLatitude">Latidute</string>
+    <string name="parcoursListButton">Liste des parcours</string>
+
+    <string name="addZoneButton">Ajouter un parcours</string>
+    <string name="addZoneName">Nom</string>
+    <string name="addZoneLatitude">Latitude</string>
     <string name="addZoneLongitude">Longitude</string>
     <string name="addZoneDistance">Distance (par rapport au point de départ)</string>
-    <string name="title_activity_add_sounds">AddSounds</string>
+    <string name="addZonePickPosition">Choisir une position</string>
+    <string name="addZoneAdd">Ajouter le parcours</string>
 
-    <string name="button_main_add_sound">Add sounds</string>
-    <string name="button_add_sound">Add</string>
-    <string name="button_save_sound">Save</string>
+    <string name="title_activity_add_sounds">AddSounds</string>
+    <string name="button_main_add_sound">Ajouter une playlist</string>
+    <string name="button_add_sound">Ajouter</string>
+    <string name="button_save_sound">Sauvegarder</string>
 </resources>
