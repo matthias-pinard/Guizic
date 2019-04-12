@@ -2,10 +2,12 @@ package com.example.matthias.guizic;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.SeekBar;
 
 import com.example.matthias.guizic.AddZone.AddZone;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -15,12 +17,15 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapPicker extends AppCompatActivity implements OnMapReadyCallback {
 
     LatLng mPosition;
+    Circle mCircle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,23 @@ public class MapPicker extends AppCompatActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        SeekBar seekBar = findViewById(R.id.seekBarMap);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                mCircle.setRadius((double) i);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     @Override
@@ -37,8 +59,17 @@ public class MapPicker extends AppCompatActivity implements OnMapReadyCallback {
             googleMap.clear();
             googleMap.addMarker(new MarkerOptions().position(latLng));
             mPosition = latLng;
+
+            // Instantiates a new CircleOptions object and defines the center and radius
+            CircleOptions circleOptions = new CircleOptions()
+                    .center(mPosition)
+                    .radius(400) // In meters
+                    .fillColor(Color.argb(50, 255, 0, 0));
+
+            // Get back the mutable Circle
+            mCircle = googleMap.addCircle(circleOptions);
         });
-            updateMapPosition(googleMap);
+        updateMapPosition(googleMap);
 
     }
 
@@ -60,7 +91,8 @@ public class MapPicker extends AppCompatActivity implements OnMapReadyCallback {
         Log.d("DDDBUG", "" + mPosition.longitude);
         intent.putExtra("latitude", mPosition.latitude);
         intent.putExtra("longitude", mPosition.longitude);
-        setResult(AddZone.RESULT_OK,  intent);
+        intent.putExtra("distance", mCircle.getRadius());
+        setResult(AddZone.RESULT_OK, intent);
         finish();
     }
 }

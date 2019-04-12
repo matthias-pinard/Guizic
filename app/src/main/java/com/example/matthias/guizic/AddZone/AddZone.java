@@ -63,6 +63,8 @@ public class AddZone extends AppCompatActivity {
                 textViewLatitude.setText(String.valueOf(data.getDoubleExtra("latitude", 0)));
                 TextView textViewLongitude = findViewById(R.id.inputLongitude);
                 textViewLongitude.setText(String.valueOf(data.getDoubleExtra("longitude", 0)));
+                TextView textViewDistance = findViewById(R.id.inputDistance);
+                textViewDistance.setText(String.valueOf(data.getDoubleExtra("distance", 0)));
             }
         }
     }
