@@ -2,82 +2,22 @@
   "name" : "Test Guizic",
   "zones" : [
     {
-      "secretName": "Point test",
-      "realName": "f",
-      "latitude": 48.117150,
-      "longitude": -1.633946,
-      "sensibilite": 2
+      "secretName": "Point A",
+      "latitude": 48.121001,
+      "longitude": -1.703919,
+      "distance":70
     },
     {
-      "secretName": "Pi Parcours 1",
-      "realName": "Pi Parcours 1",
-      "latitude": 48.119995,
-      "longitude": -1.639111,
-      "sensibilite": 1.8
+      "secretName": "Point B",
+      "latitude": 48.120607,
+      "longitude": -1.702161,
+      "distance":137
     },
     {
-      "secretName": "Pi parcours 2",
-      "realName": "Pi parcours 2",
-      "latitude": 48.116347,
-      "longitude": -1.639824,
-      "sensibilite": 1.65
-    },
-    {
-      "secretName": "Pi parcours 3",
-      "realName": "Pi parcours 3",
-      "latitude": 48.115521,
-      "longitude": -1.636599,
-      "sensibilite": 1.7
-    },
-    {
-      "secretName": "PF",
-      "realName": "PF",
-      "latitude": 48.117062,
-      "longitude": -1.637597,
-      "sensibilite": 1.8
-    },
-    {
-      "secretName": "E",
-      "realName" : "Esir",
-      "latitude" : 48.118096,
-      "longitude" : -1.636408,
-      "sensibilite" : 2
-    },
-    {
-      "secretName": "C",
-      "realName": "Cafeteria",
-      "latitude": 48.118464,
-      "longitude": -1.635913,
-      "sensibilite": 2
-    },
-    {
-      "secretName": "Rennes2",
-      "realName": "Rennes2 Galerie art et essai",
-      "latitude": 48.120091,
-      "longitude": -1.700433,
-      "sensibilite": 2
-    },
-    {
-      "secretName": "P Tugdual",
-      "realName": "Point Tugdual",
-      "latitude": 48.115383,
-      "longitude": -1.636920,
-      "sensibilite":2
-    }
-  ],
-
-  "parcours" : [
-    {
-      "name" : "Parcours 1",
-      "zones" : ["Esir", "PI parcours 1", "PF"]
-    },
-    {
-      "names": "Parcours 2" ,
-      "zones" : ["Esir", "PI parcours 2", "PF"]
-    },
-    {
-      "names" : "Parcours 3",
-      "zones" : ["Esir", "PI parcours 3", "PF"]
+      "secretName": "Point C",
+      "latitude": 48.120410,
+      "longitude": -1.703881,
+      "distance":130
     }
   ]
 }
