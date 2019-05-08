@@ -3,6 +3,7 @@ package com.example.matthias.guizic.RecyclerActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,14 +43,16 @@ public class MyAdaptater extends RecyclerView.Adapter<MyAdaptater.MyViewHolder> 
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final SecretZone secretZone = mDataset.get(position);
         final Context context = holder.mButton.getContext();
-        String name = secretZone.getSecretName();
+        String name = secretZone.getName();
         holder.mButton.setText(name);
         holder.mButton.setOnClickListener((View v) -> {
             Intent intent = new Intent(context, GpsActivity.class);
             intent.putExtra("latitude", secretZone.getLatitude());
             intent.putExtra("longitude", secretZone.getLongitude());
             intent.putExtra("sensibilite", secretZone.getSensibilite());
-            intent.putExtra("name", secretZone.getSecretName());
+            intent.putExtra("name", secretZone.getName());
+            Log.d("SOUND", "zone sound id: " + secretZone.getSongId());
+            intent.putExtra("sound_id", secretZone.getSongId());
             context.startActivity(intent);
         });
     }

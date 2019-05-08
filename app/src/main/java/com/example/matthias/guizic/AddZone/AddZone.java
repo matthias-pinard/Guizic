@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.matthias.guizic.Database.AppDatabase;
 import com.example.matthias.guizic.Database.SecretZone;
@@ -31,20 +33,44 @@ public class AddZone extends AppCompatActivity {
     }
 
     public void onCLick(View view) {
+
         TextView textViewName = findViewById(R.id.inputName);
+        String textName = textViewName.getText().toString();
+        TextView textViewLatitude = findViewById(R.id.inputLatitude);
+        String textLatitude = textViewLatitude.getText().toString();
+        TextView textViewLongitude = findViewById(R.id.inputLongitude);
+        String textLongitude = textViewLongitude.getText().toString();
+        TextView textViewDistance = findViewById(R.id.inputDistance);
+        String textDistance = textViewDistance.getText().toString();
+
+        if(textName.equals("") || textLatitude.equals("") || textLongitude.equals("") || textDistance.equals("")) {
+            CharSequence text = "Remplisser tout les champs avant  de confirmer.";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+            return;
+        }
+
+
         String name = textViewName.getText().toString();
 
-        TextView textViewLatitude = findViewById(R.id.inputLatitude);
         double latitude = Double.parseDouble(textViewLatitude.getText().toString());
 
-        TextView textViewLongitude = findViewById(R.id.inputLongitude);
         double longitude = Double.parseDouble(textViewLongitude.getText().toString());
 
-        TextView textViewDistance = findViewById(R.id.inputDistance);
         double distance = Double.parseDouble(textViewDistance.getText().toString());
 
         double sensibilite = 500 / distance;
-        SecretZone secretZone = new SecretZone(longitude, latitude, sensibilite, name, name);
+
+        Spinner spinner = findViewById(R.id.inputSounds);
+        String soundName = spinner.getSelectedItem().toString();
+
+        Log.d("SOUND", "sound name: " + soundName);
+        AppDatabase db = AppDatabase.getInstance(this);
+        long id = db.soundDao().getSoundId(soundName);
+
+        SecretZone secretZone = new SecretZone(longitude, latitude, sensibilite, name, id);
         AppDatabase.getInstance(this).secretZoneDao().insertAll(secretZone);
         finish();
     }
@@ -70,10 +96,12 @@ public class AddZone extends AppCompatActivity {
     }
 
     public void setSpinner() {
-//        AppDatabase db = AppDatabase.getInstance(this);
-//        Cursor cursor = db.soundDao().getCursor();
-//        CursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.simple_spinner_item, null, R.id.spi)
-//        Spinner spinner = findViewById(R.id.inputSounds);
-//        spinner.setAdapter(cursorAdapter);
+        AppDatabase db = AppDatabase.getInstance(this);
+        Cursor cursor = db.soundDao().getCursor();
+        String[] from = {"name"};
+        int[] to = {R.id.spinnerText};
+        CursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.simple_spinner_item, cursor, from, to, SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        Spinner spinner = findViewById(R.id.inputSounds);
+        spinner.setAdapter(cursorAdapter);
     }
 }

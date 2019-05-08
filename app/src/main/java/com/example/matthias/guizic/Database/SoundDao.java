@@ -16,12 +16,14 @@ public interface SoundDao {
     public List<Sound> getSounds();
 
     @Query("SELECT * FROM Piste AS p WHERE p.sound_id=(:sound_id)")
-    public List<Piste> getPistes(int sound_id);
+    public List<Piste> getPistes(long sound_id);
+
+    @Query("SELECT _id FROM Sound WHERE name=(:name)")
+    public long getSoundId(String name);
 
     @Query("SELECT MAX(_id) FROM sound")
     public int getMaxId();
 
     @Query("SELECT * from sound")
     public Cursor getCursor();
-
 }

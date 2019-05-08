@@ -4,6 +4,7 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.util.Log;
 
@@ -55,10 +56,16 @@ public abstract class AppDatabase extends RoomDatabase {
         lZone = jsonReader.parseJsonFileZone();
         SecretZone[] secretZones = {};
         secretZones = lZone.toArray(secretZones);
-        getInstance(context).
+        AppDatabase db = getInstance(context);
+
+        Sound sound = new Sound("playlist 1");
+        db.soundDao().insert(sound);
+
+        db.
                 secretZoneDao().
                 insertAll(secretZones);
+
+
         Log.d(TAG, "Pre-populated");
     }
-
 }

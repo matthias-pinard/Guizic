@@ -26,6 +26,7 @@ public class MapPicker extends AppCompatActivity implements OnMapReadyCallback {
 
     LatLng mPosition;
     Circle mCircle;
+    double mCircleRadius = 400.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class MapPicker extends AppCompatActivity implements OnMapReadyCallback {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                mCircleRadius = (double)i;
                 mCircle.setRadius((double) i);
             }
 
@@ -63,7 +65,7 @@ public class MapPicker extends AppCompatActivity implements OnMapReadyCallback {
             // Instantiates a new CircleOptions object and defines the center and radius
             CircleOptions circleOptions = new CircleOptions()
                     .center(mPosition)
-                    .radius(400) // In meters
+                    .radius(mCircleRadius) // In meters
                     .fillColor(Color.argb(50, 255, 0, 0));
 
             // Get back the mutable Circle

@@ -28,7 +28,7 @@ public class GpsActivity extends AppCompatActivity {
     private boolean mIsDestInit = false;
     private Intent mIntent;
     private double mSensibilite = 0;
-
+    private long mSoundId;
 
     private final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private boolean mIsBound;
@@ -56,6 +56,7 @@ public class GpsActivity extends AppCompatActivity {
             localBinder.setGpsListener(mGpsChangeListener);
             localBinder.setSensibility(mSensibilite);
             localBinder.setDestination(mDestination);
+            localBinder.setSoundId(mSoundId);
             localBinder.activateListener();
             mGps.setDestination(mDestination);
 
@@ -94,7 +95,9 @@ public class GpsActivity extends AppCompatActivity {
             double latitude = mIntent.getDoubleExtra("latitude", -1);
             mName = mIntent.getStringExtra("name");
             mSensibilite = mIntent.getDoubleExtra("sensibilite", 1);
-            Log.d(TAG, "Latitude : " + latitude + ", longitude : " + longitude);
+            mSoundId = mIntent.getLongExtra("sound_id", 0);
+
+//            Log.d(TAG, "Latitude : " + latitude + ", longitude : " + longitude);
             mDestination.setLatitude(latitude);
             mDestination.setLongitude(longitude);
             mIsDestInit = true;

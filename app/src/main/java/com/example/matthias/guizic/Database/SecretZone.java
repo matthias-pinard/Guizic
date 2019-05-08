@@ -3,8 +3,6 @@ package com.example.matthias.guizic.Database;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.content.Context;
-import android.content.res.AssetManager;
 
 @Entity
 public class SecretZone {
@@ -21,27 +19,29 @@ public class SecretZone {
     private double sensibilite;
 
     @ColumnInfo
-    private String realName;
+    private String name;
 
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
-    public String getSecretName() {
-        return secretName;
-    }
-
-    public void setSecretName(String secretName) {
-        this.secretName = secretName;
-    }
 
     @ColumnInfo
-    private String secretName;
+    private long songId;
+
+
+    public SecretZone(double longitude, double latitude, double sensibilite, String name, long songId) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.sensibilite = sensibilite;
+        this.name = name;
+        this.songId = songId;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getUid() {
         return uid;
@@ -76,23 +76,12 @@ public class SecretZone {
     }
 
 
-    public SecretZone(double longitude, double latitude, double sensibilite, String realName, String secretName) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.sensibilite = sensibilite;
-        this.realName = realName;
-        this.secretName = secretName;
+    public long getSongId() {
+        return songId;
     }
 
-    public static SecretZone[] populateData() {
-        SecretZone[] s = new SecretZone[] {
-                new SecretZone(-1.636408, 48.118096, 1.3, "Esir", "E"),
-                new SecretZone(-1.638580, 48.114272, 1.3, "Osur", "O"),
-                new SecretZone(-1.643484, 48.117491, 1.3, "Diapason", "D"),
-                new SecretZone(-1.635913, 48.118464, 1.3, "Cafeteria", "C"),
-                new SecretZone(-1.638580, 48.114272, 1.0, "Osur", "Paul"),
-        };
-        return s;
+    public void setSongId(long songId) {
+        this.songId = songId;
     }
 
 }

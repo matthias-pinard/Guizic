@@ -5,19 +5,21 @@
       "secretName": "Point A",
       "latitude": 48.121001,
       "longitude": -1.703919,
-      "distance":70
+      "sensibilite": 7.14
     },
     {
       "secretName": "Point B",
       "latitude": 48.120607,
       "longitude": -1.702161,
-      "distance":137
+      "sensibilite": 3.65
+
     },
     {
       "secretName": "Point C",
       "latitude": 48.120410,
       "longitude": -1.703881,
-      "distance":130
+      "sensibilite": 3.85
+
     }
   ]
 }

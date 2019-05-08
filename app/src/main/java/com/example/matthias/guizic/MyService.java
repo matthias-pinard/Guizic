@@ -15,8 +15,11 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.example.matthias.guizic.Database.AppDatabase;
+import com.example.matthias.guizic.Database.Piste;
 import com.example.matthias.guizic.Gps.GPSGoogle;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +33,7 @@ public class MyService extends Service {
     private GPSGoogle.GpsChangeListener mActivityListener;
     private Location mDestination;
     private int NOTIFICATION = R.string.local_service_started;
-
+    private long mSoundId;
     private double mSensibilite = 1;
     private MusicsManager mMusicsManager;
 
@@ -53,6 +56,9 @@ public class MyService extends Service {
 
         public void setGpsListener(GPSGoogle.GpsChangeListener gpsListener) {
             mActivityListener = gpsListener;
+        }
+        public void setSoundId(long soundId) {
+            mSoundId = soundId;
         }
 
 
@@ -146,12 +152,25 @@ public class MyService extends Service {
 
     public void initMusic() {
         List<MediaPlayer> mediasPlayers = new ArrayList<MediaPlayer>();
-        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte1));
-        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte2));
-        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte3));
-        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte4));
-        mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte5));
-
+        Log.d("SOUND", "sound id: " + mSoundId);
+        if(mSoundId == 0) {
+            mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte1));
+            mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte2));
+            mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte3));
+            mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte4));
+            mediasPlayers.add(MediaPlayer.create(this, R.raw.stratte5));
+        } else {
+            List<Piste> lPistes = AppDatabase.getInstance(this).soundDao().getPistes(mSoundId);
+            for(Piste piste : lPistes) {
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                try {
+                    mediaPlayer.setDataSource(piste.getPath());
+                    mediasPlayers.add(mediaPlayer);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         mMusicsManager = new MusicsManager();
         mMusicsManager.addMediaPlayer(mediasPlayers);

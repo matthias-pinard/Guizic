@@ -22,6 +22,7 @@
     <string name="addZoneDistance">Distance (par rapport au point de départ)</string>
     <string name="addZonePickPosition">Choisir une position</string>
     <string name="addZoneAdd">Ajouter le parcours</string>
+    <string name="addZoneSounds">Playlist</string>
 
     <string name="title_activity_add_sounds">AddSounds</string>
     <string name="button_main_add_sound">Ajouter une playlist</string>
