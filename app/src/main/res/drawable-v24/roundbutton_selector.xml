@@ -1,0 +1,8 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true"
+        android:drawable="@drawable/roundbutton_background_pressed_jsm"/> <!-- pressed -->
+    <item android:state_focused="true"
+        android:drawable="@drawable/roundbutton_background_pressed_jsm"/> <!-- focused -->
+    <item android:drawable="@drawable/roundbutton_background_default_jsm"/> <!-- default -->
+</selector>

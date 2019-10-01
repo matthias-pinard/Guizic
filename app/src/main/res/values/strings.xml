@@ -28,4 +28,7 @@
     <string name="button_main_add_sound">Ajouter une playlist</string>
     <string name="button_add_sound">Ajouter</string>
     <string name="button_save_sound">Sauvegarder</string>
+
+
+    <string name="Start">Commencer</string>
 </resources>

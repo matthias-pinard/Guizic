@@ -3,59 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:context="com.example.matthias.guizic.MainActivity"
-    tools:layout_editor_absoluteY="81dp"
+    android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/button_margin"
-    android:layout_marginTop="@dimen/button_margin">
+    android:layout_marginTop="@dimen/button_margin"
+    android:orientation="horizontal"
+    tools:context="com.example.matthias.guizic.MainActivity"
+    tools:layout_editor_absoluteY="81dp">
 
 
-    <TextView
-        android:id="@+id/textView"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_page_text"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="36sp" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button_list_activity"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/main_page_button_size"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/button_selector"
-        android:onClick="onClickListActivity"
-        android:text="@string/parcoursListButton"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="8dp" />
-
-    <Button
-        android:id="@+id/button_list_activity3"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/main_page_button_size"
-        android:layout_marginTop="@dimen/button_margin"
-        android:background="@drawable/button_selector"
-        android:onClick="onClickAddZone"
-        android:text="@string/addZoneButton"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="96dp" />
-
-    <Button
-        android:id="@+id/button_add_sound"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/main_page_button_size"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/button_selector"
-        android:onClick="onClickAddSound"
-        android:text="@string/button_main_add_sound"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="144dp" />
+        <Button
+            android:id="@+id/button_list_activity"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/roundbutton_selector"
+            android:onClick="onClickListActivity"
+            android:text="@string/Start"
+            android:textColor="@color/textJsm"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

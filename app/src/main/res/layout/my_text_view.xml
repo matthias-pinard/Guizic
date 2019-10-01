@@ -12,6 +12,6 @@
         android:background="@drawable/button_selector"
         android:fontFamily="sans-serif"
         android:includeFontPadding="true"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/textJsm"
         android:textSize="18sp" />
 </LinearLayout>
