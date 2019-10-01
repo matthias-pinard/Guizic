@@ -13,6 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="@font/yanonekaffeesatz_regular"
         android:text="@string/parcoursListButton"
         android:textAlignment="center"
         android:textColor="#000000"

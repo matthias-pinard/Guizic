@@ -7,7 +7,7 @@
     <Button
         android:id="@+id/button_recycler"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_margin="12sp"
         android:background="@drawable/button_selector"
         android:fontFamily="sans-serif"
