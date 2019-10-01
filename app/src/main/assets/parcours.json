@@ -2,24 +2,28 @@
   "name" : "Test Guizic",
   "zones" : [
     {
-      "secretName": "Point A",
-      "latitude": 48.121001,
-      "longitude": -1.703919,
-      "sensibilite": 7.14
+      "secretName": "1 - Sculpture en béton blanc armé",
+      "latitude": 48.119926,
+      "longitude": -1.639493,
+      "sensibilite": 1.5
     },
     {
-      "secretName": "Point B",
-      "latitude": 48.120607,
-      "longitude": -1.702161,
-      "sensibilite": 3.65
-
+      "secretName": "2 - Matériaux de construction",
+      "latitude": 48.120842,
+      "longitude": -1.641711,
+      "sensibilite": 2.0
     },
     {
-      "secretName": "Point C",
-      "latitude": 48.120410,
-      "longitude": -1.703881,
-      "sensibilite": 3.85
-
+      "secretName": "3 - Mur d'escalade",
+      "latitude": 118907,
+      "longitude": -1.641568,
+      "sensibilite": 2.0
+    },
+    {
+      "secretName": "4 - Diapason",
+      "latitude": 48.117836,
+      "longitude": -1.643678,
+      "sensibilite": 2
     }
   ]
 }
