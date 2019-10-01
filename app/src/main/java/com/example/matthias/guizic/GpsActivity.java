@@ -142,7 +142,7 @@ public class GpsActivity extends AppCompatActivity {
 //        String distance = String.format("%.2f", mGps.getDistanceToDestination());
 //        str += "\nDist: " + distance + "m";
 //        str += "\nVol: " + (int)mMusicsManager.getVolume();
-        str += "\nSens: " + mSensibilite;
+//        str += "\nSens: " + mSensibilite;
         TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
         textViewDistance.setText(String.valueOf(str));
 
