@@ -77,7 +77,6 @@ public class MyService extends Service {
 
     @Override
     public void onCreate() {
-        promptForGps();
         mGps = new GPSGoogle(this, mDestination, mGpsChangeListener);
         mGps.setListenerActive(true);
 
@@ -136,20 +135,6 @@ public class MyService extends Service {
         mNM.notify(NOTIFICATION, notification);
     }
 
-    public void promptForGps() {
-        LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-        boolean enabled = service
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-    // check if enabled and if not send user to the GSP settings
-    // Better solution would be to display a dialog and suggesting to
-    // go to the settings
-        if (!enabled) {
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        }
-    }
-
     public void initMusic() {
         List<MediaPlayer> mediasPlayers = new ArrayList<MediaPlayer>();
         Log.d("SOUND", "sound id: " + mSoundId);
@@ -180,7 +165,7 @@ public class MyService extends Service {
         double dist = mGps.getDistanceToDestination();
         double vol = mMusicsManager.getMaxVolume() - dist * mSensibilite;
         mMusicsManager.setVolume( vol);
-        if(dist < 10 && !isArrived) {
+        if(dist < 100000 && !isArrived) {
             playWinMusic();
         }
         Log.d("DISTANCE", "d: " + dist + " maxVol: " + vol);
@@ -195,7 +180,15 @@ public class MyService extends Service {
         mMusicsManager.stop();
         mGps.stopLocationUpdate();
         musicWin.start();
+        musicWin.setOnCompletionListener(mp -> {
+            Intent intent = new Intent(this, InfoActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("image", "tour_de_math");
+            intent.putExtra("info", "La tour des maths est une tour d'escalade, mathématiquement correct, de part sa structure en forme de cylindre et son orientation dans l'espace 3D terrestre et astrale qui nous permet d'estimer à 10^-50 pret pi ainsi que le nombre d'or");
+            startActivity(intent);
+        });
     }
+
     private GPSGoogle.GpsChangeListener mGpsChangeListener = new GPSGoogle.GpsChangeListener(){
 
         @Override

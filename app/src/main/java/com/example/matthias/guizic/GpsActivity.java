@@ -139,22 +139,13 @@ public class GpsActivity extends AppCompatActivity {
         int nbBoucle = (int)(mMusicsManager.getVolume() / 100) + 1;
         int max = (int) (mMusicsManager.getMaxVolume() / 100) + 1;
         String str = mName ;
-//        str += "\n\n" + nbBoucle + "/" + (max - 1) + "\n\nboucles musicales jouées";
-//        String distance = String.format("%.2f", mGps.getDistanceToDestination());
-//        str += "\nDist: " + distance + "m";
-//        str += "\nVol: " + (int)mMusicsManager.getVolume();
-//        str += "\nSens: " + mSensibilite;
+
 
         TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
         Button buttonNbBoucles = (Button) findViewById(R.id.button_nb_boucles);
 
         textViewDistance.setText(String.valueOf(str));
         buttonNbBoucles.setText(String.valueOf(nbBoucle + "/" + (max - 1)));
-
-//        TextView textViewDistance = (TextView) findViewById(R.id.textViewDestination);
-//        textViewDistance.setText(String.valueOf(distance));
-//
-//        Log.d(TAG, "Distance : " + mGps.getDistanceToDestination());
     }
 
     public boolean requestPermission() {
