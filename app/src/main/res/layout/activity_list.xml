@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecyclerActivity.ListActivity">
+    tools:context=".RecyclerActivity.ListActivity"
+    android:background="@drawable/main_background">
 
     <TextView
         android:id="@+id/title"
