@@ -21,17 +21,24 @@ public class SecretZone {
     @ColumnInfo
     private String name;
 
-
     @ColumnInfo
     private long songId;
 
+    @ColumnInfo
+    private String image;
 
-    public SecretZone(double longitude, double latitude, double sensibilite, String name, long songId) {
+    @ColumnInfo
+    private String info;
+
+
+    public SecretZone(double longitude, double latitude, double sensibilite, String name, long songId, String image, String info) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.sensibilite = sensibilite;
         this.name = name;
         this.songId = songId;
+        this.image = image;
+        this.info = info;
     }
 
 
@@ -84,4 +91,19 @@ public class SecretZone {
         this.songId = songId;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
 }

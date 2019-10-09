@@ -63,7 +63,9 @@ public class JsonReaderUtils {
                 double longitude = parcours.getDouble("longitude");
                 double sensibilite = parcours.getDouble("sensibilite");
                 String secretName = parcours.getString("secretName");
-                SecretZone secretZone = new SecretZone(longitude, latitude, sensibilite, secretName, 0);
+                String image = parcours.getString("image");
+                String info = parcours.getString("info");
+                SecretZone secretZone = new SecretZone(longitude, latitude, sensibilite, secretName, 0, image, info);
                 lZone.add(secretZone);
             }
         } catch (JSONException e) {

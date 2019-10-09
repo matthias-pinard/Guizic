@@ -70,8 +70,8 @@ public class AddZone extends AppCompatActivity {
         AppDatabase db = AppDatabase.getInstance(this);
         long id = db.soundDao().getSoundId(soundName);
 
-        SecretZone secretZone = new SecretZone(longitude, latitude, sensibilite, name, id);
-        AppDatabase.getInstance(this).secretZoneDao().insertAll(secretZone);
+//        SecretZone secretZone = new SecretZone(longitude, latitude, sensibilite, name, id);
+//        AppDatabase.getInstance(this).secretZoneDao().insertAll(secretZone);
         finish();
     }
 

@@ -40,6 +40,8 @@ public class GpsActivity extends AppCompatActivity {
     private MusicsManager mMusicsManager;
 
     private String mName;
+    private String mImage;
+    private String mInfo;
 
     private GPSGoogle.GpsChangeListener mGpsChangeListener = () -> {
         refresh();
@@ -48,6 +50,7 @@ public class GpsActivity extends AppCompatActivity {
 
     MyService.LocalBinder localBinder;
     private ServiceConnection mConnection = new ServiceConnection() {
+
 
         @Override
         public void onServiceConnected (ComponentName className, IBinder binder) {
@@ -59,6 +62,8 @@ public class GpsActivity extends AppCompatActivity {
             localBinder.setDestination(mDestination);
             localBinder.setSoundId(mSoundId);
             localBinder.activateListener();
+            localBinder.setOnFindListener(() -> onFind());
+
             mGps.setDestination(mDestination);
 
             Log.d(TAG, "Distance : " + mGps.getDistanceToDestination());
@@ -97,7 +102,8 @@ public class GpsActivity extends AppCompatActivity {
             mName = mIntent.getStringExtra("name");
             mSensibilite = mIntent.getDoubleExtra("sensibilite", 1);
             mSoundId = mIntent.getLongExtra("sound_id", 0);
-
+            mImage = mIntent.getStringExtra("image");
+            mInfo = mIntent.getStringExtra("info");
 //            Log.d(TAG, "Latitude : " + latitude + ", longitude : " + longitude);
             mDestination.setLatitude(latitude);
             mDestination.setLongitude(longitude);
@@ -205,5 +211,15 @@ public class GpsActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    public void onFind() {
+        Intent intent = new Intent(this, InfoActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        intent.putExtra("info", mInfo);
+        intent.putExtra("image", mImage);
+        startActivity(intent);
+        finish();
     }
 }

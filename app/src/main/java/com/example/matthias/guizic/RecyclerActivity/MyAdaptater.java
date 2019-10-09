@@ -51,8 +51,9 @@ public class MyAdaptater extends RecyclerView.Adapter<MyAdaptater.MyViewHolder> 
             intent.putExtra("longitude", secretZone.getLongitude());
             intent.putExtra("sensibilite", secretZone.getSensibilite());
             intent.putExtra("name", secretZone.getName());
-            Log.d("SOUND", "zone sound id: " + secretZone.getSongId());
             intent.putExtra("sound_id", secretZone.getSongId());
+            intent.putExtra("image", secretZone.getImage());
+            intent.putExtra("info", secretZone.getInfo());
             context.startActivity(intent);
         });
     }

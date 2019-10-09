@@ -36,6 +36,7 @@ public class MyService extends Service {
     private long mSoundId;
     private double mSensibilite = 1;
     private MusicsManager mMusicsManager;
+    private OnFindListener mOnFindListener;
 
     private boolean mIsActivityListenerActive = false;
 
@@ -73,6 +74,8 @@ public class MyService extends Service {
         public double getSensibility() {
             return mSensibilite;
         }
+
+        public void setOnFindListener(OnFindListener onFindListener) {mOnFindListener = onFindListener;}
     }
 
     @Override
@@ -181,11 +184,7 @@ public class MyService extends Service {
         mGps.stopLocationUpdate();
         musicWin.start();
         musicWin.setOnCompletionListener(mp -> {
-            Intent intent = new Intent(this, InfoActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("image", "tour_de_math");
-            intent.putExtra("info", "La tour des maths est une tour d'escalade, mathématiquement correct, de part sa structure en forme de cylindre et son orientation dans l'espace 3D terrestre et astrale qui nous permet d'estimer à 10^-50 pret pi ainsi que le nombre d'or");
-            startActivity(intent);
+            mOnFindListener.onFind();
         });
     }
 
@@ -214,6 +213,10 @@ public class MyService extends Service {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+
+    public interface OnFindListener {
+        void onFind();
     }
 
 }
