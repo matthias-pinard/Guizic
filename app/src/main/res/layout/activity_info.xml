@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.matthias.guizic.InfoActivity">
+    tools:context="com.example.matthias.guizic.InfoActivity"
+    android:background="@drawable/main_background">
 
     <ImageView
         android:id="@+id/imageViewPoint"
@@ -20,25 +21,38 @@
 
     <TextView
         android:id="@+id/textInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20sp"
+        android:layout_marginVertical="20sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/yanonekaffeesatz_regular"
+        android:gravity="fill_horizontal"
+        android:scrollbars="vertical"
         android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonInfoNext"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewPoint"
-        android:layout_marginTop="20sp"
-        android:layout_marginHorizontal="20sp"
-        android:gravity="fill_horizontal"/>
+        app:layout_constraintVertical_bias="0.091" />
 
     <Button
         android:id="@+id/buttonInfoNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/button_selector"
         android:onClick="onClickNext"
-        android:text="Button"
+        android:text="@string/ok"
+        android:textColor="@color/textJsm"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="20sp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

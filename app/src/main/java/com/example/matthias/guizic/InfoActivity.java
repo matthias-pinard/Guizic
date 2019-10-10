@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.text.method.ScrollingMovementMethod;
 
 import com.example.matthias.guizic.RecyclerActivity.ListActivity;
 
@@ -24,6 +25,7 @@ public class InfoActivity extends AppCompatActivity {
 
         ImageView imageView = findViewById(R.id.imageViewPoint);
         TextView infoText = findViewById(R.id.textInfo);
+        infoText.setMovementMethod(new ScrollingMovementMethod());
 
         imageView.setImageResource(imgId);
         infoText.setText(info);
