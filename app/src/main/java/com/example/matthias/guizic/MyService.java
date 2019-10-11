@@ -166,6 +166,7 @@ public class MyService extends Service {
             }
         }
 
+
         mMusicsManager = new MusicsManager();
         mMusicsManager.addMediaPlayer(mediasPlayers);
     }
