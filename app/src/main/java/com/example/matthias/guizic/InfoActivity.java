@@ -18,6 +18,13 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
+        //Add logo in Action Bar
+        //---------------------------------------------------------
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher_round);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        //---------------------------------------------------------
+
         Intent intent = getIntent();
         String imgIdName = intent.getStringExtra("image");
         int imgId = getResources().getIdentifier(imgIdName, "drawable", getPackageName());

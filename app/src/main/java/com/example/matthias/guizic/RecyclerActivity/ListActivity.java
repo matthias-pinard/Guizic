@@ -21,6 +21,13 @@ import java.util.List;
          super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_list);
 
+         //Add logo in Action Bar
+         //---------------------------------------------------------
+         getSupportActionBar().setDisplayShowHomeEnabled(true);
+         getSupportActionBar().setLogo(R.mipmap.ic_launcher_round);
+         getSupportActionBar().setDisplayUseLogoEnabled(true);
+         //---------------------------------------------------------
+
          List<SecretZone> myDataset = AppDatabase.getInstance(this).secretZoneDao().getAll();
 
          mRecyclerView = findViewById(R.id.recycler_view);

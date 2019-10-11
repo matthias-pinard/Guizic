@@ -83,6 +83,13 @@ public class GpsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps);
 
+        //Add logo in Action Bar
+        //---------------------------------------------------------
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher_round);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        //---------------------------------------------------------
+
         mDestination = new Location("User");
         mIntent = getIntent();
         Uri data = mIntent.getData();
