@@ -166,6 +166,7 @@ public class MyService extends Service {
             }
         }
 
+
         mMusicsManager = new MusicsManager();
         mMusicsManager.addMediaPlayer(mediasPlayers);
     }
@@ -174,7 +175,7 @@ public class MyService extends Service {
         double dist = mGps.getDistanceToDestination();
         double vol = mMusicsManager.getMaxVolume() - dist * mSensibilite;
         mMusicsManager.setVolume( vol);
-        if(dist < 100000 && !isArrived) {
+        if(dist < 10 && !isArrived) {
             playWinMusic();
         }
         Log.d("DISTANCE", "d: " + dist + " maxVol: " + vol);
