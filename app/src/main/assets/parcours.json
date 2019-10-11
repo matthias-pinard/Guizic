@@ -3,9 +3,9 @@
   "zones" : [
     {
       "secretName": "1 - Mur d'escalade",
-      "latitude": 48.118907,
-      "longitude": -1.641568,
-      "sensibilite": 3.0,
+      "latitude": 48.118735,
+      "longitude": -1.641736,
+      "sensibilite": 2.1,
       "image": "tour_de_math",
       "info": "La tour des maths est une tour d'escalade, mathématiquement correct, de part sa structure en forme de cylindre et son orientation dans l'espace 3D terrestre et astrale qui nous permet d'estimer à 10^-50 pret pi ainsi que le nombre d'or"
     },
@@ -13,14 +13,14 @@
       "secretName": "2 - Sculpture en béton blanc armé",
       "latitude": 48.119926,
       "longitude": -1.639493,
-      "sensibilite": 1.5,
+      "sensibilite": 2.0,
       "image": "tour_de_math",
       "info": "La tour des maths est une tour d'escalade, mathématiquement correct, de part sa structure en forme de cylindre et son orientation dans l'espace 3D terrestre et astrale qui nous permet d'estimer à 10^-50 pret pi ainsi que le nombre d'or"
     },
     {
       "secretName": "3 - Matériaux de construction",
-      "latitude": 48.120842,
-      "longitude": -1.641711,
+      "latitude": 48.120848,
+      "longitude": -1.641633,
       "sensibilite": 2.0,
       "image": "tour_de_math",
       "info": "La tour des maths est une tour d'escalade, mathématiquement correct, de part sa structure en forme de cylindre et son orientation dans l'espace 3D terrestre et astrale qui nous permet d'estimer à 10^-50 pret pi ainsi que le nombre d'or"
@@ -29,7 +29,7 @@
       "secretName": "4 - Diapason",
       "latitude": 48.117836,
       "longitude": -1.643678,
-      "sensibilite": 2,
+      "sensibilite": 2.0,
       "image": "tour_de_math",
       "info": "La tour des maths est une tour d'escalade, mathématiquement correct, de part sa structure en forme de cylindre et son orientation dans l'espace 3D terrestre et astrale qui nous permet d'estimer à 10^-50 pret pi ainsi que le nombre d'or"
     }
