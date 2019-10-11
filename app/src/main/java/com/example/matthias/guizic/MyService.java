@@ -76,6 +76,12 @@ public class MyService extends Service {
         }
 
         public void setOnFindListener(OnFindListener onFindListener) {mOnFindListener = onFindListener;}
+
+        public void stopMusicManager() {
+            if(mMusicsManager.isPlaying()) {
+                mMusicsManager.stop();
+            }
+        }
     }
 
     @Override

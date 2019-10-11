@@ -121,9 +121,11 @@ public class GpsActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        doUnbindService();
-        mMusicsManager.stop();
+        if(mMusicsManager.isPlaying()) {
+            mMusicsManager.stop();
+        }
         mMusicsManager.release();
+        doUnbindService();
     }
 
     void doBindService() {
