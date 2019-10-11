@@ -14,6 +14,9 @@
     <string name="nb_boucles">boucles musicales jouées</string>
     <string name="main_page_text">Bienvenue</string>
 
+    <string name="activation_gps">Veuillez activer votre gps</string>
+    <string name="gps_setting">Accéder au paramètre gps</string>
+
     <string name="parcoursListButton">Liste des parcours</string>
 
     <string name="addZoneButton">Ajouter un parcours</string>

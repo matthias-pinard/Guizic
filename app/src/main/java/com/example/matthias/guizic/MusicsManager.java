@@ -112,5 +112,11 @@ public class MusicsManager {
             }
         }
     }
+    public boolean isPlaying() {
+        if(mListMedia.size() == 0) {
+            return false;
+        }
+        return mListMedia.get(0).isPlaying();
+    }
 
 }

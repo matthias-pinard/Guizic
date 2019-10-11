@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -121,9 +123,11 @@ public class GpsActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        doUnbindService();
-        mMusicsManager.stop();
+        if(mMusicsManager.isPlaying()) {
+            mMusicsManager.stop();
+        }
         mMusicsManager.release();
+        doUnbindService();
     }
 
     void doBindService() {
@@ -221,5 +225,26 @@ public class GpsActivity extends AppCompatActivity {
         intent.putExtra("image", mImage);
         startActivity(intent);
         finish();
+    }
+
+    public void promptForGps() {
+        LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+        boolean enabled = service
+                .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        // check if enabled and if not send user to the GSP settings
+        // Better solution would be to display a dialog and suggesting to
+        // go to the settings
+        if (!enabled) {
+            new AlertDialog.Builder(this).
+                    setMessage(R.string.activation_gps).
+                    setPositiveButton(R.string.activation_gps, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(intent);
+                        }
+                    });
+        }
     }
 }
