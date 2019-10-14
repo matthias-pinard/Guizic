@@ -46,6 +46,9 @@ public class GPSGoogle {
                     return;
                 }
                 for (Location location : locationResult.getLocations()) {
+                    if(mDestination == null || location == null) {
+                        return;
+                    }
                     mDistanceDestination = location.distanceTo(mDestination);
                 }
                 if(listenerIsActive) {

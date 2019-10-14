@@ -216,6 +216,7 @@ public class GpsActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted
+                    promptForGps();
                     doBindService();
                 } else {
                     finish();
@@ -245,12 +246,9 @@ public class GpsActivity extends AppCompatActivity {
         if (!enabled) {
             new AlertDialog.Builder(this).
                     setMessage(R.string.activation_gps).
-                    setPositiveButton(R.string.activation_gps, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            startActivity(intent);
-                        }
+                    setPositiveButton(R.string.activation_gps, (dialog, which) -> {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
                     });
         }
     }

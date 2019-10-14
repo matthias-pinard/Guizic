@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.matthias.guizic.Database.AppDatabase;
 import com.example.matthias.guizic.Database.SecretZone;
 import com.example.matthias.guizic.R;
+import com.example.matthias.guizic.utils.JsonReaderUtils;
 
 import java.util.List;
 
@@ -28,7 +29,9 @@ import java.util.List;
          getSupportActionBar().setDisplayUseLogoEnabled(true);
          //---------------------------------------------------------
 
-         List<SecretZone> myDataset = AppDatabase.getInstance(this).secretZoneDao().getAll();
+//         List<SecretZone> myDataset = AppDatabase.getInstance(this).secretZoneDao().getAll();
+         JsonReaderUtils jsonReader = new JsonReaderUtils(this);
+         List<SecretZone> myDataset =  jsonReader.parseJsonFileZone();
 
          mRecyclerView = findViewById(R.id.recycler_view);
 

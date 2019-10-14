@@ -123,9 +123,13 @@ public class MyService extends Service {
         // On utilise le même texte en id de notification et en ticker.
         CharSequence text = getText(R.string.local_service_started);
 
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        intent.setComponent(getPackageManager().getLaunchIntentForPackage(getPackageName()).getComponent());
         //Pending intent pour lancer l'activité si l'utilisateur clique sur la notification.
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, MainActivity.class), 0);
+                intent, 0);
 
         Notification.Builder builder = new Notification.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher_round);
@@ -173,7 +177,8 @@ public class MyService extends Service {
 
     public void gpsListener() {
         double dist = mGps.getDistanceToDestination();
-        double vol = mMusicsManager.getMaxVolume() - dist * mSensibilite;
+        double sens = mMusicsManager.getMaxVolume() / mSensibilite;
+        double vol = mMusicsManager.getMaxVolume() - dist * sens;
         mMusicsManager.setVolume( vol);
         if(dist < 10 && !isArrived) {
             playWinMusic();
