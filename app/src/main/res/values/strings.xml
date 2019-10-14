@@ -14,8 +14,9 @@
     <string name="nb_boucles">boucles musicales jouées</string>
     <string name="main_page_text">Bienvenue</string>
 
-    <string name="activation_gps">Veuillez activer votre gps</string>
-    <string name="gps_setting">Accéder au paramètre gps</string>
+    <string name="title_activation_gps">Activation GPS</string>
+    <string name="activation_gps">Guizic a besoin que le GPS soit activé afin de fonctionner correctement</string>
+    <string name="gps_setting">Accéder au paramètre GPS</string>
 
     <string name="parcoursListButton">Liste des parcours</string>
 

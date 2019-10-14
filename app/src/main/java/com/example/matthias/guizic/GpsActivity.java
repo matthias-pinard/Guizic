@@ -202,6 +202,7 @@ public class GpsActivity extends AppCompatActivity {
             }
             return false;
         } else {
+            promptForGps();
             doBindService();
             return true;
         }
@@ -245,11 +246,12 @@ public class GpsActivity extends AppCompatActivity {
         // go to the settings
         if (!enabled) {
             new AlertDialog.Builder(this).
+                    setTitle(R.string.title_activation_gps).
                     setMessage(R.string.activation_gps).
-                    setPositiveButton(R.string.activation_gps, (dialog, which) -> {
+                    setPositiveButton(R.string.gps_setting, (dialog, which) -> {
                         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         startActivity(intent);
-                    });
+                    }).create().show();
         }
     }
 }
