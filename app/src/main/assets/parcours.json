@@ -2,28 +2,28 @@
   "name" : "Test Guizic",
   "zones" : [
     {
-      "secretName": "1 - Mur d'escalade",
+      "secretName": "1 - Ascension",
       "latitude": 48.118683,
       "longitude": -1.641634,
       "sensibilite": 210,
       "image": "tour_de_math",
-      "info": "La tour des maths est une tour d'escalade, mathématiquement correct, de part sa structure en forme de cylindre et son orientation dans l'espace 3D terrestre et astrale qui nous permet d'estimer à 10^-50 pret pi ainsi que le nombre d'or"
+      "info": "Tour de 40 mètres équipée en 1990 par l’initiative du professeur au S.I.U.A.P.S Yvon DIOURIS. Elle se situe sur le bâtiment principale de l’UFR (Unité de Formation de Recherche) de mathématiques.  Des sessions d’escalade y sont organisées chaque année."
     },
     {
-      "secretName": "2 - Sculpture en béton blanc armé",
+      "secretName": "2 - Ervin Patkaï",
       "latitude": 48.119926,
       "longitude": -1.639493,
       "sensibilite": 230,
       "image": "sculpture",
-      "info": "La tour des maths est une tour d'escalade, mathématiquement correct, de part sa structure en forme de cylindre et son orientation dans l'espace 3D terrestre et astrale qui nous permet d'estimer à 10^-50 pret pi ainsi que le nombre d'or"
+      "info": "Cette sculpture a été commandé en 1972 par l’architecte Louis Arretche à l’artiste Ervin Patkaï, un sculpteur d’origine hongroise. Le caractère abstrait de cette oeuvre très découpée, n’empêche pas d’y voir un animal fabuleux en pleine course. Les nombreux orifices, telles les alvéoles d’une ruche, établissent un lien étroit entre la matière et le vide.\nLa plupart des sculptures monumentales d’Ervin Patkaï, par des jeux de perspective et de percée, impliquent le spectateur qui, en bougeant autour de l'oeuvre, perçoit différemment la composition entière, presque labyrinthique."
     },
     {
-      "secretName": "3 - Matériaux de construction",
+      "secretName": "3 - Matériaux",
       "latitude": 48.120848,
       "longitude": -1.641633,
       "sensibilite": 210,
       "image": "materiaux",
-      "info": "La tour des maths est une tour d'escalade, mathématiquement correct, de part sa structure en forme de cylindre et son orientation dans l'espace 3D terrestre et astrale qui nous permet d'estimer à 10^-50 pret pi ainsi que le nombre d'or"
+      "info": "Sur les conseils de l’organisation d’art contemporain 40mcube, l’oeuvre dresse la liste des matériaux nécessaire à la construction des bâtiments et voiries du campus, comme une photographie chiffrée d’un instant T de ce territoire en permanente évolution. C’est l’aboutissement d’un travail collectif ayant réunis différents services, personnels et étudiants de l’Université de Rennes 1 pour l’élaboration des calculs complexes."
     },
     {
       "secretName": "4 - Diapason",
@@ -31,7 +31,7 @@
       "longitude": -1.643678,
       "sensibilite": 400,
       "image": "diapason",
-      "info": "La tour des maths est une tour d'escalade, mathématiquement correct, de part sa structure en forme de cylindre et son orientation dans l'espace 3D terrestre et astrale qui nous permet d'estimer à 10^-50 pret pi ainsi que le nombre d'or"
+      "info": "Le Diapason, un équipement culturel polyvalent. C’est un lieu de vie avec des salles de sport pour l'enseignement universitaire, et une salle de spectacle à la programmation variée : musiques, théâtre, cinéma, danse, rencontres art et sciences... Un lieu de convivialité où l'on peut se détendre, se restaurer, voir des expositions.\nLe Diapason en quelques chiffres : en moyenne chaque année 120 événements soit : 40 spectacles - 5 expositions - 40 accompagnements de projets étudiants - 35 manifestations de type colloque et conférence – Environ 25000 personnes."
     }
   ]
 }
