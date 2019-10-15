@@ -1,9 +1,13 @@
  package com.example.matthias.guizic.RecyclerActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.matthias.guizic.Database.AppDatabase;
 import com.example.matthias.guizic.Database.SecretZone;
@@ -46,5 +50,23 @@ import java.util.List;
          // specify an adapter (see also next example)
          mAdapter = new MyAdaptater(myDataset);
          mRecyclerView.setAdapter(mAdapter);
+     }
+
+     public boolean onCreateOptionsMenu(Menu menu) {
+         getMenuInflater().inflate(R.menu.menu_actionbar, menu);
+         return true;
+     }
+
+     public boolean onOptionsItemSelected(MenuItem item) {
+         switch (item.getItemId()) {
+             case R.id.action_like:
+
+                 Intent intent = new Intent(Intent.ACTION_VIEW);
+                 intent.setData(Uri.parse("market://details?id=guizicnco.app.guizic&gl=FR"));
+                 startActivity(intent);
+
+                 return true;
+         }
+         return super.onOptionsItemSelected(item);
      }
 }
